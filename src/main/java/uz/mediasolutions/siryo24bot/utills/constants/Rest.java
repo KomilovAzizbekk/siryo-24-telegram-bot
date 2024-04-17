@@ -21,7 +21,6 @@ public interface Rest {
             AuthController.AUTH + "**",
 
             CategoryController.CATEGORY + "**",
-            SubcategoryController.SUBCATEGORY + "**",
             ProductController.PRODUCT + "**",
             UserController.USER + "**",
             SellerController.SELLER + "**",
