@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ef7304d8-f99b-4bab-937a-cbab36f60f2d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6e3d980a-678c-41dd-b4c4-43163124c3ec.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6e3d980a-678c-41dd-b4c4-43163124c3ec/storage_v2/_src_/database/postgres.edMnLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6e3d980a-678c-41dd-b4c4-43163124c3ec/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siryo-24-bot.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/Siyo24BotApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/component/DataLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/component/MessageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/config/AuditConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/config/AuditorAwareImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/config/MessageSourceConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/config/SpringFoxConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/config/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/config/WebMvcConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/abs/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/abs/FileImageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/abs/LanguageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/abs/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/impl/AuthControllerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/impl/FileImageControllerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/impl/LanguageControllerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/impl/UserControllerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Alternative.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Applications.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/FileImage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Language.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/LanguagePs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/LanguageSourcePs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Price.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Seller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Step.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Subcategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/TgUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/template/AbsAudit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/template/AbsDate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/template/AbsLong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/template/AbsUUID.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/enums/LanguageName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/enums/RoleName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/enums/StepName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/exceptions/ExceptionHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/exceptions/RestException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/manual/ApiResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/manual/ErrorData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/manual/LocalTimeSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/TgUserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/payload/SignInDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/payload/TgUserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/payload/TokenDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/payload/TranslateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/repository/LanguageRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/repository/LanguageRepositoryPs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/repository/LanguageSourceRepositoryPs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/repository/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/repository/StepRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/repository/TgUserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/secret/JwtAuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/secret/JwtAuthenticationEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/secret/JwtProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/MakeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/TgService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/abs/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/abs/FileImageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/abs/LanguageServicePs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/abs/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/impl/AuthServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/impl/FileImageServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/impl/LanguageServicePsImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/utills/CommonUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/utills/UTF8Control.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/utills/constants/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/utills/constants/Rest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-dev.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-prod.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/messages_ru.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/messages_uz.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/uz/mediasolutions/siryo24bot/Siyo24BotApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/application-dev.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/application-prod.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/messages_ru.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/messages_uz.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/Siyo24BotApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/component/DataLoader.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/component/MessageService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/config/AuditConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/config/AuditorAwareImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/config/MessageSourceConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/config/SecurityConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/config/SpringFoxConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/config/SwaggerConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/config/WebMvcConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/controller/abs/AuthController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/controller/abs/FileImageController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/controller/abs/LanguageController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/controller/abs/UserController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/controller/impl/AuthControllerImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/controller/impl/FileImageControllerImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/controller/impl/LanguageControllerImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/controller/impl/UserControllerImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Alternative$AlternativeBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Alternative.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Applications$ApplicationsBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Applications.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Category$CategoryBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Category.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/FileImage$FileImageBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/FileImage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Language$LanguageBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Language.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/LanguagePs$LanguagePsBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/LanguagePs.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/LanguageSourcePs$LanguageSourcePsBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/LanguageSourcePs.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Price$PriceBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Price.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Product$ProductBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Product.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Role$RoleBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Role.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Seller$SellerBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Seller.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Step$StepBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Step.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Subcategory$SubcategoryBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/Subcategory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/TgUser$TgUserBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/TgUser.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/User$UserBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/template/AbsAudit.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/template/AbsDate.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/template/AbsLong.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/entity/template/AbsUUID.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/enums/LanguageName.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/enums/RoleName.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/enums/StepName.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/exceptions/ExceptionHelper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/exceptions/RestException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/manual/ApiResult.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/manual/ErrorData.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/manual/LocalTimeSerializer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/mapper/TgUserMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/mapper/TgUserMapperImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/payload/SignInDTO$SignInDTOBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/payload/SignInDTO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/payload/TgUserDTO$TgUserDTOBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/payload/TgUserDTO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/payload/TokenDTO$TokenDTOBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/payload/TokenDTO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/payload/TranslateDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/repository/LanguageRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/repository/LanguageRepositoryPs.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/repository/LanguageSourceRepositoryPs.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/repository/RoleRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/repository/StepRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/repository/TgUserRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/repository/UserRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/secret/JwtAuthFilter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/secret/JwtAuthenticationEntryPoint.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/secret/JwtProvider.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/service/MakeService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/service/TgService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/service/abs/AuthService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/service/abs/FileImageService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/service/abs/LanguageServicePs.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/service/abs/UserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/service/impl/AuthServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/service/impl/FileImageServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/service/impl/LanguageServicePsImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/utills/CommonUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/utills/UTF8Control.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/utills/constants/Message.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/uz/mediasolutions/siryo24bot/utills/constants/Rest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/generated-sources/annotations/uz/mediasolutions/siryo24bot/mapper/TgUserMapperImpl.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2fC0HPZRcjsfUmb9Mq109qQY2OH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.Siyo24BotApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Java/siyo-24-bot",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "File.Encoding",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Java\siyo-24-bot\src\main\java\uz\mediasolutions\siyo24bot\repository" />
+      <recent name="D:\Java\siyo-24-bot\src\main\java\uz\mediasolutions\siyo24bot\entity" />
+      <recent name="D:\Java\siyo-24-bot\src\main\java\uz\mediasolutions\siyo24bot\payload" />
+      <recent name="D:\Java\siyo-24-bot\src\main\java\uz\mediasolutions\siyo24bot\enums" />
+      <recent name="D:\Java\siyo-24-bot\src\main\java\uz\mediasolutions\siyo24bot" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="uz.mediasolutions.siryo24bot.mapper" />
+      <recent name="uz.mediasolutions.siryo24bot.service.impl" />
+      <recent name="uz.mediasolutions.siryo24bot.service.abs" />
+      <recent name="uz.mediasolutions.siryo24bot.payload" />
+      <recent name="uz.mediasolutions.siryo24bot.controller.impl" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Siyo24BotApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="siryo-24-bot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="uz.mediasolutions.siryo24bot.Siyo24BotApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ef7304d8-f99b-4bab-937a-cbab36f60f2d" name="Changes" comment="" />
+      <created>1713289666394</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713289666394</updated>
+      <workItem from="1713289667450" duration="6208000" />
+      <workItem from="1713334586300" duration="679000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
