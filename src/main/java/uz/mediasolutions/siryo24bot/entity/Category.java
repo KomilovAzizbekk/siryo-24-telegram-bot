@@ -35,6 +35,6 @@ public class Category extends AbsDate {
     private Integer number;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Subcategory> subcategories;
+    private List<Product> products;
 
 }

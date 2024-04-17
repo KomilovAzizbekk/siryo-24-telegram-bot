@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapperImpl productMapper;
     private final SellerRepository sellerRepository;
-    private final SubcategoryRepository subcategoryRepository;
+    private final CategoryRepository categoryRepository;
     private final AlternativeRepository alternativeRepository;
 
     @Override
@@ -68,8 +68,8 @@ public class ProductServiceImpl implements ProductService {
         Seller seller = sellerRepository.findById(dto.getSellerId()).orElseThrow(
                 () -> RestException.restThrow("Seller not found", HttpStatus.BAD_REQUEST));
 
-        //Getting new subcategory of product
-        Subcategory subcategory = subcategoryRepository.findById(dto.getSubcategoryId()).orElseThrow(
+        //Getting new category of product
+        Category category = categoryRepository.findById(dto.getCategoryId()).orElseThrow(
                 () -> RestException.restThrow("Subcategory not found", HttpStatus.BAD_REQUEST));
 
         //Editing alternatives
@@ -102,7 +102,7 @@ public class ProductServiceImpl implements ProductService {
 
         //Setting all fields
         product.setSeller(seller);
-        product.setSubcategory(subcategory);
+        product.setCategory(category);
         product.setName(dto.getName());
         product.setAlternatives(alternatives);
         product.setCountry(dto.getCountry());

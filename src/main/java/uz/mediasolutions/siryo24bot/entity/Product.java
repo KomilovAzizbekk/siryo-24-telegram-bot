@@ -29,7 +29,7 @@ public class Product extends AbsLong {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Subcategory subcategory;
+    private Category category;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Alternative> alternatives;

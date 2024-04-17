@@ -26,8 +26,6 @@ public class ProductWebDTO {
 
     private String name;
 
-    private String subcategory;
-
     private String country;
 
     private String manufacturer;
@@ -36,7 +34,7 @@ public class ProductWebDTO {
 
     private String priceUpdatedTime;
 
-    private List<AnalogProductDTO> analogs;
+    private List<AnalogProductWebDTO> analogs;
 
     private Integer analogsCount;
 }

@@ -35,9 +35,6 @@ public interface Message {
     String SEND_COMMENT = "send.comment";
     String SKIP_COMMENT = "skip.comment";
     String YOU_ARE_BANNED = "you.are.banned";
-    String CHOOSE_ROLE = "choose.role";
-    String CUSTOMER = "customer";
-    String SELLER = "seller";
     String MENU_CATALOG = "menu.catalog";
     String MENU_MY_APPLICATIONS = "menu.my_applications";
     String MENU_INSTRUCTION = "menu.instruction";

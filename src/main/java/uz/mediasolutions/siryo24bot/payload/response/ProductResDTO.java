@@ -21,7 +21,7 @@ public class ProductResDTO {
 
     private String name;
 
-    private String subcategory;
+    private String category;
 
     private List<AlternativeDTO> alternativeNames;
 

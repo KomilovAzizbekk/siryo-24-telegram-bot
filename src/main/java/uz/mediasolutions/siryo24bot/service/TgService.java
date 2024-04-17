@@ -57,10 +57,6 @@ public class TgService extends TelegramLongPollingBot {
                 } else if (makeService.getUserStep(chatId).equals(StepName.INCORRECT_PHONE_FORMAT)) {
                     execute(makeService.whenIncorrectPhoneFormat(update));
                 } else if (makeService.getUserStep(chatId).equals(StepName.ENTER_NAME)) {
-                    execute(makeService.whenChooseRole(update));
-                } else if (makeService.getUserStep(chatId).equals(StepName.CHOOSE_ROLE) &&
-                        (text.equals(makeService.getMessage(Message.CUSTOMER, makeService.getUserLanguage(chatId))) ||
-                                text.equals(makeService.getMessage(Message.SELLER, makeService.getUserLanguage(chatId))))) {
                     execute(makeService.whenMenu(update));
                 } else if (makeService.getUserStep(chatId).equals(StepName.CHOOSE_FROM_MENU) &&
                         text.equals(makeService.getMessage(Message.MENU_CATALOG, makeService.getUserLanguage(chatId)))) {

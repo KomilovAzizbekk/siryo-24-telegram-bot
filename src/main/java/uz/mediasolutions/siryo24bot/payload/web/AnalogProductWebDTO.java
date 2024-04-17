@@ -1,4 +1,4 @@
-package uz.mediasolutions.siryo24bot.payload;
+package uz.mediasolutions.siryo24bot.payload.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,16 +9,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TgUserDTO {
+public class AnalogProductWebDTO {
 
     private Long id;
 
-    private String chatId;
-
     private String name;
 
-    private String phoneNumber;
+    private String country;
 
-    private boolean banned;
+    private String category;
 
 }

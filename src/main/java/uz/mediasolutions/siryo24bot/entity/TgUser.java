@@ -39,9 +39,6 @@ public class TgUser extends AbsLong {
     @ManyToOne(fetch = FetchType.LAZY)
     private Step step;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Role role;
-
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Product> products;
 

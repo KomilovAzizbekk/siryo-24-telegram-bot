@@ -19,7 +19,7 @@ public class ProductReqDTO {
 
     private String name;
 
-    private Long subcategoryId;
+    private Long categoryId;
 
     private List<String> alternativeNames;
 

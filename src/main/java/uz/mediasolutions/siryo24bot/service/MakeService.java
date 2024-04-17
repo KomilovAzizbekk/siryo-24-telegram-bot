@@ -223,54 +223,6 @@ public class MakeService {
         return sendMessage;
     }
 
-    public SendMessage whenChooseRole(Update update) {
-        String name = update.getMessage().getText();
-        String chatId = getChatId(update);
-        String language = getUserLanguage(chatId);
-        TgUser user = tgUserRepository.findByChatId(chatId);
-        user.setName(name);
-        tgUserRepository.save(user);
-
-        SendMessage sendMessage = new SendMessage(chatId,
-                String.format(getMessage(Message.CHOOSE_ROLE, language), name));
-        sendMessage.setReplyMarkup(forChooseRole(chatId));
-        setUserStep(chatId, StepName.CHOOSE_ROLE);
-        return sendMessage;
-    }
-
-    public SendMessage whenChooseRole2(Update update) {
-        String chatId = getChatId(update);
-        String language = getUserLanguage(chatId);
-        TgUser user = tgUserRepository.findByChatId(chatId);
-
-        SendMessage sendMessage = new SendMessage(chatId,
-                String.format(getMessage(Message.CHOOSE_ROLE, language), user.getName()));
-        sendMessage.setReplyMarkup(forChooseRole(chatId));
-        setUserStep(chatId, StepName.CHOOSE_ROLE);
-        return sendMessage;
-    }
-
-    private ReplyKeyboardMarkup forChooseRole(String chatId) {
-        ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
-        List<KeyboardRow> rowList = new ArrayList<>();
-        KeyboardRow row1 = new KeyboardRow();
-        String language = getUserLanguage(chatId);
-
-        KeyboardButton button1 = new KeyboardButton();
-        KeyboardButton button2 = new KeyboardButton();
-
-        button1.setText(getMessage(Message.CUSTOMER, language));
-        button2.setText(getMessage(Message.SELLER, language));
-
-        row1.add(button1);
-        row1.add(button2);
-
-        rowList.add(row1);
-        markup.setKeyboard(rowList);
-        markup.setSelective(true);
-        markup.setResizeKeyboard(true);
-        return markup;
-    }
 
     public SendMessage check(Update update) {
         String chatId = getChatId(update);
@@ -282,8 +234,6 @@ public class MakeService {
             return whenPhoneNumber(update);
         } else if (user.getName() == null) {
             return whenEnterName(update);
-        } else if (user.getRole() == null) {
-            return whenChooseRole2(update);
         } else {
             return whenMenu(update);
         }
@@ -293,14 +243,9 @@ public class MakeService {
         String chatId = getChatId(update);
         String language = getUserLanguage(chatId);
         TgUser user = tgUserRepository.findByChatId(chatId);
-        String text = update.getMessage().getText();
-
-        if (user.getRole() == null) {
-            if (text.equals(getMessage(Message.CUSTOMER, language)))
-                user.setRole(roleRepository.findByName(RoleName.ROLE_CUSTOMER));
-            else if (text.equals(getMessage(Message.SELLER, language))) {
-                user.setRole(roleRepository.findByName(RoleName.ROLE_SELLER));
-            }
+        if (user.getName() == null) {
+            String name = update.getMessage().getText();
+            user.setName(name);
             tgUserRepository.save(user);
         }
 

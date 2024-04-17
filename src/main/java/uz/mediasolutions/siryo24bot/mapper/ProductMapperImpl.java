@@ -4,11 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import uz.mediasolutions.siryo24bot.entity.*;
+import uz.mediasolutions.siryo24bot.enums.LanguageName;
 import uz.mediasolutions.siryo24bot.exceptions.RestException;
 import uz.mediasolutions.siryo24bot.payload.AlternativeDTO;
 import uz.mediasolutions.siryo24bot.payload.AnalogProductDTO;
 import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
+import uz.mediasolutions.siryo24bot.payload.web.AnalogProductWebDTO;
+import uz.mediasolutions.siryo24bot.payload.web.ProductWeb2DTO;
+import uz.mediasolutions.siryo24bot.payload.web.ProductWebDTO;
 import uz.mediasolutions.siryo24bot.repository.*;
 
 import java.time.format.DateTimeFormatter;
@@ -20,9 +24,10 @@ import java.util.List;
 public class ProductMapperImpl implements ProductMapper {
 
     private final SellerRepository sellerRepository;
-    private final SubcategoryRepository subcategoryRepository;
+    private final CategoryRepository categoryRepository;
     private final AlternativeRepository alternativeRepository;
     private final ProductRepository productRepository;
+    private final TgUserRepository tgUserRepository;
 
     @Override
     public ProductResDTO toDTO(Product product) {
@@ -33,7 +38,7 @@ public class ProductMapperImpl implements ProductMapper {
                 .id(product.getId())
                 .seller(product.getSeller().getOrganization())
                 .name(product.getName())
-                .subcategory(product.getSubcategory().getNameUz() + "/" + product.getSubcategory().getNameRu())
+                .category(product.getCategory().getNameUz() + "/" + product.getCategory().getNameRu())
                 .country(product.getCountry())
                 .manufacturer(product.getManufacturer())
                 .price(product.getPrice())
@@ -98,8 +103,8 @@ public class ProductMapperImpl implements ProductMapper {
         Seller seller = sellerRepository.findById(dto.getSellerId()).orElseThrow(
                 () -> RestException.restThrow("Seller not found", HttpStatus.BAD_REQUEST));
 
-        Subcategory subcategory = subcategoryRepository.findById(dto.getSubcategoryId()).orElseThrow(
-                () -> RestException.restThrow("Subcategory not found", HttpStatus.BAD_REQUEST));
+        Category category = categoryRepository.findById(dto.getCategoryId()).orElseThrow(
+                () -> RestException.restThrow("Category not found", HttpStatus.BAD_REQUEST));
 
         List<Product> products = new ArrayList<>();
         if (dto.getAnalogs() != null) {
@@ -121,7 +126,7 @@ public class ProductMapperImpl implements ProductMapper {
         return Product.builder()
                 .seller(seller)
                 .name(dto.getName())
-                .subcategory(subcategory)
+                .category(category)
                 .alternatives(alternatives)
                 .country(dto.getCountry())
                 .manufacturer(dto.getManufacturer())
@@ -131,6 +136,84 @@ public class ProductMapperImpl implements ProductMapper {
                 .analogs(products)
                 .build();
 
+    }
+
+    @Override
+    public ProductWeb2DTO toProductWeb2DTO(Product product) {
+        if (product == null) {
+            return null;
+        }
+        return ProductWeb2DTO.builder()
+                .id(product.getId())
+                .sellerInfo(product.getSeller().getInfo())
+                .name(product.getName())
+                .sellerPhone1(product.getSeller().getPhoneNumber1())
+                .sellerPhone2(product.getSeller().getPhoneNumber2())
+                .imageUrl(product.getImageUrl())
+                .build();
+    }
+
+    @Override
+    public ProductWebDTO toProductWebDTO(Product product, String userId) {
+        if (product == null) {
+            return null;
+        }
+
+        boolean favourite = false;
+        TgUser user = tgUserRepository.findByChatId(userId);
+        if (user.getProducts() != null) {
+            for (Product userProduct : user.getProducts()) {
+                if (userProduct.equals(product)) {
+                    favourite = true;
+                    break;
+                }
+            }
+        }
+
+        return ProductWebDTO.builder()
+                .id(product.getId())
+                .seller(product.getSeller().getOrganization())
+                .acceptCash(product.getSeller().isAcceptCash())
+                .acceptTransfer(product.getSeller().isAcceptTransfer())
+                .favourite(favourite)
+                .name(product.getName())
+                .country(product.getCountry())
+                .manufacturer(product.getManufacturer())
+                .price(product.getPrice())
+                .priceUpdatedTime(product.getPriceUpdatedTime() != null ?
+                        product.getPriceUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")) : "")
+                .analogs(toAnalogProductWebDTOList(product.getAnalogs(), userId))
+                .analogsCount(toAnalogProductWebDTOList(product.getAnalogs(), userId).size())
+                .build();
+    }
+
+    @Override
+    public AnalogProductWebDTO toAnalogProductWebDTO(Product product, String userId) {
+        if (product == null) {
+            return null;
+        }
+
+        TgUser user = tgUserRepository.findByChatId(userId);
+
+        return AnalogProductWebDTO.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .country(product.getCountry())
+                .category(user.getLanguage().getName().equals(LanguageName.UZ) ?
+                        product.getCategory().getNameUz() : product.getCategory().getNameRu())
+                .build();
+    }
+
+    @Override
+    public List<AnalogProductWebDTO> toAnalogProductWebDTOList(List<Product> products, String userId) {
+        if (products == null) {
+            return null;
+        }
+        List<AnalogProductWebDTO> analogProductWebDTOs = new ArrayList<>();
+        for (Product product : products) {
+            analogProductWebDTOs.add(toAnalogProductWebDTO(product, userId));
+        }
+        return analogProductWebDTOs;
     }
 
 }

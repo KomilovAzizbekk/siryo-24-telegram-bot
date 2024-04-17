@@ -8,7 +8,6 @@ import uz.mediasolutions.siryo24bot.payload.TgUserDTO;
 @Mapper(componentModel = "spring")
 public interface TgUserMapper {
 
-    @Mapping(target = "role", source = "role.name")
     TgUserDTO toDTO(TgUser user);
 
 }
