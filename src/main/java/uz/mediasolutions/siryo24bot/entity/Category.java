@@ -3,7 +3,7 @@ package uz.mediasolutions.siryo24bot.entity;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import uz.mediasolutions.siryo24bot.entity.template.AbsLong;
+import uz.mediasolutions.siryo24bot.entity.template.AbsDate;
 
 import javax.persistence.*;
 
@@ -18,15 +18,19 @@ import javax.persistence.*;
 @DynamicUpdate
 @Entity
 @Table(name = "category")
-public class Category extends AbsLong {
+public class Category extends AbsDate {
 
-    @Column(name = "name_uz")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name_uz", nullable = false, unique = true)
     private String nameUz;
 
-    @Column(name = "name_ru")
+    @Column(name = "name_ru", nullable = false, unique = true)
     private String nameRu;
 
-    @Column(name = "number")
+    @Column(name = "number", nullable = false, unique = true)
     private Integer number;
 
 }

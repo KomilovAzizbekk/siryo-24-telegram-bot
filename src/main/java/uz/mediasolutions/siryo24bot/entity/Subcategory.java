@@ -3,10 +3,9 @@ package uz.mediasolutions.siryo24bot.entity;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import uz.mediasolutions.siryo24bot.entity.template.AbsLong;
+import uz.mediasolutions.siryo24bot.entity.template.AbsDate;
 
 import javax.persistence.*;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,15 +18,19 @@ import java.util.List;
 @DynamicUpdate
 @Entity
 @Table(name = "subcategory")
-public class Subcategory extends AbsLong {
+public class Subcategory extends AbsDate {
 
-    @Column(name = "name_uz")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name_uz", unique = true, nullable = false)
     private String nameUz;
 
-    @Column(name = "name_ru")
+    @Column(name = "name_ru", unique = true, nullable = false)
     private String nameRu;
 
-    @Column(name = "number")
+    @Column(name = "number", unique = true, nullable = false)
     private Integer number;
 
     @ManyToOne(fetch = FetchType.LAZY)

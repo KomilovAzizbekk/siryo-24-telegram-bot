@@ -3,7 +3,7 @@ package uz.mediasolutions.siryo24bot.payload;
 import lombok.Data;
 
 @Data
-public class TranslateDto {
+public class TranslateDTO {
 
     private Long id;
 

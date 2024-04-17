@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.mediasolutions.siryo24bot.entity.LanguagePs;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
-import uz.mediasolutions.siryo24bot.payload.TranslateDto;
+import uz.mediasolutions.siryo24bot.payload.TranslateDTO;
 import uz.mediasolutions.siryo24bot.utills.constants.Rest;
 
 import java.util.HashMap;
@@ -25,16 +25,16 @@ public interface LanguageController {
     @GetMapping(ALL)
     ApiResult<Page<LanguagePs>> getAllPageable(@RequestParam(defaultValue = Rest.DEFAULT_PAGE_NUMBER) int page,
                                                @RequestParam(defaultValue = Rest.DEFAULT_PAGE_SIZE) int size,
-                                               @RequestParam(defaultValue = "null", required = false) String key);
+                                               @RequestParam(required = false) String key);
 
     @GetMapping(ALL_BY_LANG)
     ResponseEntity<Map<String, String>> getAllByLang(@RequestParam(defaultValue = "UZ") String language);
 
     @PostMapping(CREATE_EDIT)
-    ApiResult<?> createTranslation(@RequestBody TranslateDto dto);
+    ApiResult<?> createTranslation(@RequestBody TranslateDTO dto);
 
     @PostMapping(CREATE_MAIN_KEY)
-    ApiResult<?> createMainKey(@RequestBody List<TranslateDto> dtos);
+    ApiResult<?> createMainKey(@RequestBody List<TranslateDTO> dtos);
 
     @PostMapping(CREATE_KEY)
     ApiResult<?> createKey(@RequestBody HashMap<String, String> dto);

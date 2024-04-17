@@ -24,12 +24,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public ApiResult<Page<TgUserDTO>> getAll(int page, int size, String search) {
         Pageable pageable = PageRequest.of(page, size);
-        if (!search.equals("null")) {
-            Page<TgUser> tgUsers = tgUserRepository.findAllByNameContainingIgnoreCaseOrPhoneNumberContainingIgnoreCaseOrderByCreatedAtDesc(search, search, pageable);
+        if (search == null || search.isEmpty()) {
+            Page<TgUser> tgUsers = tgUserRepository.findAllByOrderByCreatedAtDesc(pageable);
             Page<TgUserDTO> map = tgUsers.map(tgUserMapper::toDTO);
             return ApiResult.success(map);
         } else {
-            Page<TgUser> tgUsers = tgUserRepository.findAllByOrderByCreatedAtDesc(pageable);
+            Page<TgUser> tgUsers = tgUserRepository.findAllByNameContainingIgnoreCaseOrPhoneNumberContainingIgnoreCaseOrderByCreatedAtDesc(search, search, pageable);
             Page<TgUserDTO> map = tgUsers.map(tgUserMapper::toDTO);
             return ApiResult.success(map);
         }

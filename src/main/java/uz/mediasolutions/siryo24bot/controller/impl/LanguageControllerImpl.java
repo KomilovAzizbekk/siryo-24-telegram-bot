@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uz.mediasolutions.siryo24bot.controller.abs.LanguageController;
 import uz.mediasolutions.siryo24bot.entity.LanguagePs;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
-import uz.mediasolutions.siryo24bot.payload.TranslateDto;
+import uz.mediasolutions.siryo24bot.payload.TranslateDTO;
 import uz.mediasolutions.siryo24bot.service.abs.LanguageServicePs;
 
 import java.util.HashMap;
@@ -31,12 +31,12 @@ public class LanguageControllerImpl implements LanguageController {
     }
 
     @Override
-    public ApiResult<?> createTranslation(TranslateDto dto) {
+    public ApiResult<?> createTranslation(TranslateDTO dto) {
         return languageServicePs.createTranslation(dto);
     }
 
     @Override
-    public ApiResult<?> createMainKey(List<TranslateDto> dtos) {
+    public ApiResult<?> createMainKey(List<TranslateDTO> dtos) {
         return languageServicePs.createMainText(dtos);
     }
 

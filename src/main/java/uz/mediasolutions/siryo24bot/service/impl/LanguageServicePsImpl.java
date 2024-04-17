@@ -12,7 +12,7 @@ import uz.mediasolutions.siryo24bot.entity.LanguagePs;
 import uz.mediasolutions.siryo24bot.entity.LanguageSourcePs;
 import uz.mediasolutions.siryo24bot.exceptions.RestException;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
-import uz.mediasolutions.siryo24bot.payload.TranslateDto;
+import uz.mediasolutions.siryo24bot.payload.TranslateDTO;
 import uz.mediasolutions.siryo24bot.repository.LanguageRepositoryPs;
 import uz.mediasolutions.siryo24bot.repository.LanguageSourceRepositoryPs;
 import uz.mediasolutions.siryo24bot.service.abs.LanguageServicePs;
@@ -53,8 +53,8 @@ public class LanguageServicePsImpl implements LanguageServicePs {
 
 
     @Override
-    public ApiResult<?> createMainText(List<TranslateDto> dtos) {
-        for (TranslateDto dto : dtos) {
+    public ApiResult<?> createMainText(List<TranslateDTO> dtos) {
+        for (TranslateDTO dto : dtos) {
             if (!languageRepository.existsByKey(dto.getKey())) {
                 LanguagePs languagePs = LanguagePs.builder()
                         .key(dto.getKey())
@@ -78,7 +78,7 @@ public class LanguageServicePsImpl implements LanguageServicePs {
     }
 
     @Override
-    public ApiResult<?> createTranslation(TranslateDto dto) {
+    public ApiResult<?> createTranslation(TranslateDTO dto) {
         Optional<LanguagePs> byId = languageRepository.findByIdAndKey(dto.getId(), dto.getKey());
         if (byId.isPresent()) {
             LanguagePs languagePs = byId.get();
@@ -116,7 +116,7 @@ public class LanguageServicePsImpl implements LanguageServicePs {
     @Override
     public ApiResult<Page<LanguagePs>> getAllPaginated(int page, int size, String key) {
         Pageable pageable = PageRequest.of(page, size);
-        if (key.equals("null")) {
+        if (key == null || key.isEmpty()) {
             return ApiResult.success(languageRepository.findAll(pageable));
         }
         return ApiResult.success(languageRepository.findAllByKeyAndTranslations(pageable, key));

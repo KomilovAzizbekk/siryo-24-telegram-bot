@@ -21,4 +21,10 @@ public class Alternative {
     @Column(name = "name")
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Product product;
+
+    public Alternative(String alternativeName) {
+        this.name = alternativeName;
+    }
 }

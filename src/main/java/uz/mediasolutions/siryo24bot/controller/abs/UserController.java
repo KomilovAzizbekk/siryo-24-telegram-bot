@@ -23,7 +23,7 @@ public interface UserController {
     @GetMapping(GET_ALL)
     ApiResult<Page<TgUserDTO>> getAll(@RequestParam(defaultValue = Rest.DEFAULT_PAGE_NUMBER) int page,
                                       @RequestParam(defaultValue = Rest.DEFAULT_PAGE_SIZE) int size,
-                                      @RequestParam(defaultValue = "null", required = false) String search);
+                                      @RequestParam(required = false) String search);
 
     @GetMapping(GET_BY_ID)
     ApiResult<TgUserDTO> getById(@PathVariable Long id);

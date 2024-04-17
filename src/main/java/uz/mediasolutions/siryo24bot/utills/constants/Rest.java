@@ -17,6 +17,12 @@ public interface Rest {
             "/swagger-ui.html",
             "/webjars/**",
             AuthController.AUTH + "**",
+
+            CategoryController.CATEGORY + "**",
+            SubcategoryController.SUBCATEGORY + "**",
+            ProductController.PRODUCT + "**",
+            UserController.USER + "**",
+
             LanguageController.LANGUAGE + "**",
             FileImageController.IMAGE + "get/**",
             "/favicon.ico"

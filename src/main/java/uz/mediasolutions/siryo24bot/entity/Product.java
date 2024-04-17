@@ -25,16 +25,16 @@ public class Product extends AbsLong {
     @ManyToOne(fetch = FetchType.LAZY)
     private Seller seller;
 
-    @Column(name = "name_uz")
+    @Column(name = "name_uz", nullable = false)
     private String nameUz;
 
-    @Column(name = "name_ru")
+    @Column(name = "name_ru", nullable = false)
     private String nameRu;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Subcategory subcategory;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Alternative> alternatives;
 
     @Column(name = "country")
@@ -43,13 +43,13 @@ public class Product extends AbsLong {
     @Column(name = "manufacturer")
     private String manufacturer;
 
-    @OneToOne(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private Price price;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private FileImage image;
+    @Column(name = "image_url")
+    private String imageUrl;
 
-    private Timestamp updateTime;
+    private Timestamp priceUpdatedTime;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Product> analogs;

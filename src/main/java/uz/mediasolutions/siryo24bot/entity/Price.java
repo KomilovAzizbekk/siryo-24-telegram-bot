@@ -25,6 +25,11 @@ public class Price {
     @Column(name = "parse_time")
     private Timestamp parseTime; //HH:mm dd/MM/yyyy
 
-    @OneToOne
+    @OneToOne(mappedBy = "price", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Product product;
+
+    public Price(Integer price, Timestamp parseTime) {
+        this.price = price;
+        this.parseTime = parseTime;
+    }
 }
