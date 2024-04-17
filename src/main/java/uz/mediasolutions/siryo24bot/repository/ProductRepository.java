@@ -9,6 +9,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findAllByOrderByCreatedAtDesc(Pageable pageable);
 
-    Page<Product> findAllByNameUzContainingIgnoreCaseOrNameRuContainingIgnoreCaseOrderByCreatedAtDesc(String nameUz, String nameRu, Pageable pageable);
+    Page<Product> findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc(String name, Pageable pageable);
 
 }

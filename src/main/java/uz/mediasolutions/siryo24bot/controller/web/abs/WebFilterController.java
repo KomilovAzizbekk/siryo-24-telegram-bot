@@ -17,13 +17,13 @@ public interface WebFilterController {
     String GET_SELLER = "get-seller";
 
     @GetMapping(GET_CATEGORY)
-    ApiResult<List<?>> getCategory();
+    ApiResult<List<?>> getCategory(@RequestParam("user_id") String userId);
 
     @GetMapping(GET_COUNTRY)
-    ApiResult<Set<?>> getCountry();
+    ApiResult<List<?>> getCountry();
 
     @GetMapping(GET_MANUFACTURER)
-    ApiResult<Set<?>> getManufacturer();
+    ApiResult<List<?>> getManufacturer();
 
     @GetMapping(GET_SELLER)
     ApiResult<List<?>> getSeller();

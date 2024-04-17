@@ -34,18 +34,19 @@ public class Product extends AbsLong {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Alternative> alternatives;
 
-    @Column(name = "country")
+    @Column(name = "country", nullable = false)
     private String country;
 
-    @Column(name = "manufacturer")
+    @Column(name = "manufacturer", nullable = false)
     private String manufacturer;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private Integer price;
 
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "price_updated_time")
     private Timestamp priceUpdatedTime;
 
     @ManyToMany(fetch = FetchType.LAZY)

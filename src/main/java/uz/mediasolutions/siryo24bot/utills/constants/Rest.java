@@ -1,6 +1,8 @@
 package uz.mediasolutions.siryo24bot.utills.constants;
 
 import uz.mediasolutions.siryo24bot.controller.abs.*;
+import uz.mediasolutions.siryo24bot.controller.web.abs.WebFilterController;
+import uz.mediasolutions.siryo24bot.controller.web.abs.WebProductController;
 
 import java.util.HashMap;
 
@@ -26,6 +28,8 @@ public interface Rest {
 
             LanguageController.LANGUAGE + "**",
             FileImageController.IMAGE + "get/**",
+            WebFilterController.FILTER_WEB + "**",
+            WebProductController.PRODUCT_WEB + "**",
             "/favicon.ico"
     };
 

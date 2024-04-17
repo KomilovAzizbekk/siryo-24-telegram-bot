@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
             Page<ProductResDTO> map = products.map(productMapper::toDTO);
             return ApiResult.success(map);
         } else {
-            Page<Product> products = productRepository.findAllByNameUzContainingIgnoreCaseOrNameRuContainingIgnoreCaseOrderByCreatedAtDesc(search, search, pageable);
+            Page<Product> products = productRepository.findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc(search, pageable);
             Page<ProductResDTO> map = products.map(productMapper::toDTO);
             return ApiResult.success(map);
         }
