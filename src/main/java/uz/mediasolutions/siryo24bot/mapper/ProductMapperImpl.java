@@ -32,8 +32,7 @@ public class ProductMapperImpl implements ProductMapper {
         return ProductResDTO.builder()
                 .id(product.getId())
                 .seller(product.getSeller().getOrganization())
-                .nameUz(product.getNameUz())
-                .nameRu(product.getNameRu())
+                .name(product.getName())
                 .subcategory(product.getSubcategory().getNameUz() + "/" + product.getSubcategory().getNameRu())
                 .country(product.getCountry())
                 .manufacturer(product.getManufacturer())
@@ -76,7 +75,7 @@ public class ProductMapperImpl implements ProductMapper {
         }
         return AnalogProductDTO.builder()
                 .id(product.getId())
-                .name(product.getNameUz() + "/" + product.getNameRu())
+                .name(product.getName())
                 .build();
     }
 
@@ -121,8 +120,7 @@ public class ProductMapperImpl implements ProductMapper {
 
         return Product.builder()
                 .seller(seller)
-                .nameUz(dto.getNameUz())
-                .nameRu(dto.getNameRu())
+                .name(dto.getName())
                 .subcategory(subcategory)
                 .alternatives(alternatives)
                 .country(dto.getCountry())

@@ -1,10 +1,9 @@
-package uz.mediasolutions.siryo24bot.payload.response;
+package uz.mediasolutions.siryo24bot.payload.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.mediasolutions.siryo24bot.payload.AlternativeDTO;
 import uz.mediasolutions.siryo24bot.payload.AnalogProductDTO;
 
 import java.util.List;
@@ -13,17 +12,21 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductResDTO {
+public class ProductWebDTO {
 
     private Long id;
 
     private String seller;
 
+    private boolean acceptCash;
+
+    private boolean acceptTransfer;
+
+    private boolean favourite;
+
     private String name;
 
     private String subcategory;
-
-    private List<AlternativeDTO> alternativeNames;
 
     private String country;
 
@@ -31,9 +34,9 @@ public class ProductResDTO {
 
     private Integer price;
 
-    private String imageUrl;
-
     private String priceUpdatedTime;
 
     private List<AnalogProductDTO> analogs;
+
+    private Integer analogsCount;
 }

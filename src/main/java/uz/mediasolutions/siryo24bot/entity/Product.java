@@ -25,11 +25,8 @@ public class Product extends AbsLong {
     @ManyToOne(fetch = FetchType.LAZY)
     private Seller seller;
 
-    @Column(name = "name_uz", nullable = false)
-    private String nameUz;
-
-    @Column(name = "name_ru", nullable = false)
-    private String nameRu;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Subcategory subcategory;

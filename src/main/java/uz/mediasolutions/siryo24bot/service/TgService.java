@@ -62,6 +62,9 @@ public class TgService extends TelegramLongPollingBot {
                         (text.equals(makeService.getMessage(Message.CUSTOMER, makeService.getUserLanguage(chatId))) ||
                                 text.equals(makeService.getMessage(Message.SELLER, makeService.getUserLanguage(chatId))))) {
                     execute(makeService.whenMenu(update));
+                } else if (makeService.getUserStep(chatId).equals(StepName.CHOOSE_FROM_MENU) &&
+                        text.equals(makeService.getMessage(Message.MENU_CATALOG, makeService.getUserLanguage(chatId)))) {
+                    execute(makeService.whenCatalog(update));
                 }
             } else if (update.hasMessage() && update.getMessage().hasContact()) {
                 if (makeService.getUserStep(chatId).equals(StepName.SHARE_PHONE_NUMBER)) {

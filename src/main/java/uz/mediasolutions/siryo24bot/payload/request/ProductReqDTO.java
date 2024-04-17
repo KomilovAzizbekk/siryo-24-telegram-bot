@@ -17,9 +17,7 @@ public class ProductReqDTO {
 
     private Long sellerId;
 
-    private String nameUz;
-
-    private String nameRu;
+    private String name;
 
     private Long subcategoryId;
 

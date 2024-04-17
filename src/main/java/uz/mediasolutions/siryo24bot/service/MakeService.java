@@ -5,10 +5,13 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
 import uz.mediasolutions.siryo24bot.entity.LanguagePs;
 import uz.mediasolutions.siryo24bot.entity.LanguageSourcePs;
 import uz.mediasolutions.siryo24bot.entity.TgUser;
@@ -33,6 +36,8 @@ public class MakeService {
     private final StepRepository stepRepository;
     private final LanguageRepository languageRepository;
     private final RoleRepository roleRepository;
+
+    private final String WEB_URL = "https://siryo24-bot-web-app.netlify.app";
 
     public String getMessage(String key, String language) {
         List<LanguagePs> allByLanguage = languageRepositoryPs.findAll();
@@ -326,6 +331,8 @@ public class MakeService {
         button4.setText(getMessage(Message.MENU_INSTRUCTION, language));
         button5.setText(getMessage(Message.MENU_SUG_COMP, language));
 
+        button3.setWebApp(new WebAppInfo(WEB_URL + "/request" + chatId + "/" + language));
+
         row1.add(button1);
         row1.add(button2);
         row2.add(button3);
@@ -339,5 +346,36 @@ public class MakeService {
         markup.setSelective(true);
         markup.setResizeKeyboard(true);
         return markup;
+    }
+
+    public SendMessage whenCatalog(Update update) {
+        String chatId = getChatId(update);
+        String language = getUserLanguage(chatId);
+
+        SendMessage sendMessage = new SendMessage(chatId, getMessage(Message.PRESS_CATALOG, language));
+        sendMessage.setReplyMarkup(forCatalog(chatId));
+        return sendMessage;
+    }
+
+    private InlineKeyboardMarkup forCatalog(String chatId) {
+        String language = getUserLanguage(chatId);
+        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+
+        InlineKeyboardButton button1 = new InlineKeyboardButton();
+
+        button1.setText(getMessage(Message.MENU_CATALOG, language));
+
+        button1.setWebApp(new WebAppInfo(WEB_URL + "/catalog" + "/" + chatId + "/" + language));
+
+        List<InlineKeyboardButton> row1 = new ArrayList<>();
+
+        row1.add(button1);
+
+        rowsInline.add(row1);
+
+        markupInline.setKeyboard(rowsInline);
+
+        return markupInline;
     }
 }

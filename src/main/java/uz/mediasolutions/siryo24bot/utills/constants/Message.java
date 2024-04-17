@@ -41,4 +41,5 @@ public interface Message {
     String MENU_CATALOG = "menu.catalog";
     String MENU_MY_APPLICATIONS = "menu.my_applications";
     String MENU_INSTRUCTION = "menu.instruction";
+    String PRESS_CATALOG = "press.catalog";
 }

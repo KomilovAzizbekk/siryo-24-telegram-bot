@@ -103,8 +103,7 @@ public class ProductServiceImpl implements ProductService {
         //Setting all fields
         product.setSeller(seller);
         product.setSubcategory(subcategory);
-        product.setNameUz(dto.getNameUz());
-        product.setNameRu(dto.getNameRu());
+        product.setName(dto.getName());
         product.setAlternatives(alternatives);
         product.setCountry(dto.getCountry());
         product.setManufacturer(dto.getManufacturer());
