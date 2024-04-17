@@ -17,6 +17,7 @@ import uz.mediasolutions.siryo24bot.service.abs.ProductService;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +28,6 @@ public class ProductServiceImpl implements ProductService {
     private final SellerRepository sellerRepository;
     private final SubcategoryRepository subcategoryRepository;
     private final AlternativeRepository alternativeRepository;
-    private final PriceRepository priceRepository;
 
     @Override
     public ApiResult<Page<ProductResDTO>> getAll(int page, int size, String search) {
@@ -75,33 +75,30 @@ public class ProductServiceImpl implements ProductService {
         //Editing alternatives
         List<Alternative> alternatives = product.getAlternatives();
         alternatives.clear();
-        for (String alternativeName : dto.getAlternativeNames()) {
-            if (!alternativeRepository.existsByName(alternativeName)) {
-                Alternative alternative = alternativeRepository.save(new Alternative(alternativeName));
-                alternatives.add(alternative);
-            } else {
-                Alternative alternative = alternativeRepository.findByName(alternativeName);
-                alternatives.add(alternative);
+        if (dto.getAlternativeNames() != null) {
+            for (String alternativeName : dto.getAlternativeNames()) {
+                if (!alternativeRepository.existsByName(alternativeName)) {
+                    Alternative alternative = alternativeRepository.save(new Alternative(alternativeName));
+                    alternatives.add(alternative);
+                } else {
+                    Alternative alternative = alternativeRepository.findByName(alternativeName);
+                    alternatives.add(alternative);
+                }
             }
         }
 
         //Editing analogs
         List<Product> analogs = product.getAnalogs();
         analogs.clear();
-        for (Long analog : dto.getAnalogs()) {
-            if (productRepository.existsById(analog)) {
-                Product analogProduct = productRepository.findById(analog).orElseThrow(
-                        () -> RestException.restThrow("Product not found", HttpStatus.BAD_REQUEST));
-                analogs.add(analogProduct);
+        if (dto.getAnalogs() != null) {
+            for (Long analog : dto.getAnalogs()) {
+                if (productRepository.existsById(analog)) {
+                    Product analogProduct = productRepository.findById(analog).orElseThrow(
+                            () -> RestException.restThrow("Product not found", HttpStatus.BAD_REQUEST));
+                    analogs.add(analogProduct);
+                }
             }
         }
-
-        //Editing price
-        Price price = priceRepository.findById(product.getPrice().getId()).orElseThrow(
-                () -> RestException.restThrow("Price not found", HttpStatus.BAD_REQUEST));
-        price.setPrice(dto.getPrice());
-        price.setProduct(product);
-        Price savedPrice = priceRepository.save(price);
 
         //Setting all fields
         product.setSeller(seller);
@@ -111,9 +108,10 @@ public class ProductServiceImpl implements ProductService {
         product.setAlternatives(alternatives);
         product.setCountry(dto.getCountry());
         product.setManufacturer(dto.getManufacturer());
-        product.setPrice(savedPrice);
+        product.setPrice(dto.getPrice());
         product.setImageUrl(dto.getImageUrl());
-        product.setPriceUpdatedTime(new Timestamp(System.currentTimeMillis()));
+        product.setPriceUpdatedTime(!Objects.equals(product.getPrice(), dto.getPrice()) ?
+                new Timestamp(System.currentTimeMillis()) : null);
         product.setAnalogs(analogs);
         productRepository.save(product);
         return ApiResult.success("Edited successfully");

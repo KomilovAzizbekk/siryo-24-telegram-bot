@@ -19,6 +19,8 @@ public class TgUserDTO {
 
     private String phoneNumber;
 
+    private String role;
+
     private boolean banned;
 
 }

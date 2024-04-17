@@ -57,8 +57,10 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void addRole() {
-        Role role = Role.builder().name(RoleName.ROLE_ADMIN).build();
-        roleRepository.save(role);
+        for (RoleName value : RoleName.values()) {
+            Role role = Role.builder().name(value).build();
+            roleRepository.save(role);
+        }
     }
 
 

@@ -22,7 +22,6 @@ public class ProductMapperImpl implements ProductMapper {
     private final SellerRepository sellerRepository;
     private final SubcategoryRepository subcategoryRepository;
     private final AlternativeRepository alternativeRepository;
-    private final PriceRepository priceRepository;
     private final ProductRepository productRepository;
 
     @Override
@@ -38,7 +37,7 @@ public class ProductMapperImpl implements ProductMapper {
                 .subcategory(product.getSubcategory().getNameUz() + "/" + product.getSubcategory().getNameRu())
                 .country(product.getCountry())
                 .manufacturer(product.getManufacturer())
-                .price(product.getPrice().getPrice())
+                .price(product.getPrice())
                 .imageUrl(product.getImageUrl())
                 .priceUpdatedTime(product.getPriceUpdatedTime() != null ?
                         product.getPriceUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")) : "")
@@ -103,15 +102,22 @@ public class ProductMapperImpl implements ProductMapper {
         Subcategory subcategory = subcategoryRepository.findById(dto.getSubcategoryId()).orElseThrow(
                 () -> RestException.restThrow("Subcategory not found", HttpStatus.BAD_REQUEST));
 
-        List<Alternative> alternatives = new ArrayList<>();
-        for (String alternativeName : dto.getAlternativeNames()) {
-            Alternative alternative = alternativeRepository.save(new Alternative(alternativeName));
-            alternatives.add(alternative);
+        List<Product> products = new ArrayList<>();
+        if (dto.getAnalogs() != null) {
+            products = productRepository.findAllById(dto.getAnalogs());
         }
 
-        Price price = priceRepository.save(new Price(dto.getPrice(), null));
-
-        List<Product> products = productRepository.findAllById(dto.getAnalogs());
+        List<Alternative> alternatives = new ArrayList<>();
+        if (dto.getAlternativeNames() != null) {
+            for (String alternativeName : dto.getAlternativeNames()) {
+                if (alternativeRepository.existsByName(alternativeName)) {
+                    alternatives.add(alternativeRepository.findByName(alternativeName));
+                } else {
+                    Alternative alternative = alternativeRepository.save(new Alternative(alternativeName));
+                    alternatives.add(alternative);
+                }
+            }
+        }
 
         return Product.builder()
                 .seller(seller)
@@ -121,7 +127,7 @@ public class ProductMapperImpl implements ProductMapper {
                 .alternatives(alternatives)
                 .country(dto.getCountry())
                 .manufacturer(dto.getManufacturer())
-                .price(price)
+                .price(dto.getPrice())
                 .imageUrl(dto.getImageUrl())
                 .priceUpdatedTime(null)
                 .analogs(products)

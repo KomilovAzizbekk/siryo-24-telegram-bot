@@ -22,6 +22,7 @@ public interface Rest {
             SubcategoryController.SUBCATEGORY + "**",
             ProductController.PRODUCT + "**",
             UserController.USER + "**",
+            SellerController.SELLER + "**",
 
             LanguageController.LANGUAGE + "**",
             FileImageController.IMAGE + "get/**",

@@ -34,7 +34,7 @@ public class Product extends AbsLong {
     @ManyToOne(fetch = FetchType.LAZY)
     private Subcategory subcategory;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Alternative> alternatives;
 
     @Column(name = "country")
@@ -43,8 +43,8 @@ public class Product extends AbsLong {
     @Column(name = "manufacturer")
     private String manufacturer;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Price price;
+    @Column(name = "price")
+    private Integer price;
 
     @Column(name = "image_url")
     private String imageUrl;

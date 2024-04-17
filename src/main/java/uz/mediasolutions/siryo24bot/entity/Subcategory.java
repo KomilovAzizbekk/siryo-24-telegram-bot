@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import uz.mediasolutions.siryo24bot.entity.template.AbsDate;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,5 +36,8 @@ public class Subcategory extends AbsDate {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
+
+    @OneToMany(mappedBy = "subcategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Product> products;
 
 }

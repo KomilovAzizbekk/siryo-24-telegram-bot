@@ -21,10 +21,10 @@ import java.util.List;
 @Table(name = "sellers")
 public class Seller extends AbsLong {
 
-    @Column(name = "organization")
+    @Column(name = "organization", nullable = false)
     private String organization;
 
-    @Column(name = "phone_number_1")
+    @Column(name = "phone_number_1", nullable = false)
     private String phoneNumber1;
 
     @Column(name = "phone_number_2")
@@ -33,16 +33,16 @@ public class Seller extends AbsLong {
     @Column(name = "info", columnDefinition = "text")
     private String info;
 
-    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
-    private List<Product> products;
+    @Column(name = "active")
+    private boolean active;
 
-    @Column(name = "channel")
+    @Column(name = "channel", nullable = false)
     private String channel;
 
     @Column(name = "accept_cash")
-    private String acceptCash;
+    private boolean acceptCash;
 
     @Column(name = "accept_transfer")
-    private String acceptTransfer;
+    private boolean acceptTransfer;
 
 }
