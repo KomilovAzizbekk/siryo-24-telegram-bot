@@ -39,4 +39,7 @@ public interface Message {
     String MENU_MY_APPLICATIONS = "menu.my_applications";
     String MENU_INSTRUCTION = "menu.instruction";
     String PRESS_CATALOG = "press.catalog";
+    String CHOOSE_ROLE = "choose.role";
+    String CUSTOMER = "customer";
+    String SELLER = "seller";
 }

@@ -239,13 +239,57 @@ public class MakeService {
         }
     }
 
-    public SendMessage whenMenu(Update update) {
+    public SendMessage whenChooseRole(Update update) {
         String chatId = getChatId(update);
         String language = getUserLanguage(chatId);
         TgUser user = tgUserRepository.findByChatId(chatId);
         if (user.getName() == null) {
             String name = update.getMessage().getText();
             user.setName(name);
+            tgUserRepository.save(user);
+        }
+        SendMessage sendMessage = new SendMessage(chatId,
+                String.format(getMessage(Message.CHOOSE_ROLE, language), user.getName()));
+        sendMessage.setReplyMarkup(forChooseRole(chatId));
+        setUserStep(chatId, StepName.CHOOSE_ROLE);
+        return sendMessage;
+    }
+
+
+    private ReplyKeyboardMarkup forChooseRole(String chatId) {
+        ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
+        List<KeyboardRow> rowList = new ArrayList<>();
+        KeyboardRow row1 = new KeyboardRow();
+
+        String language = getUserLanguage(chatId);
+
+        KeyboardButton button1 = new KeyboardButton();
+        KeyboardButton button2 = new KeyboardButton();
+
+        button1.setText(getMessage(Message.CUSTOMER, language));
+        button2.setText(getMessage(Message.SELLER, language));
+
+        row1.add(button1);
+        row1.add(button2);
+
+        rowList.add(row1);
+
+        markup.setKeyboard(rowList);
+        markup.setSelective(true);
+        markup.setResizeKeyboard(true);
+        return markup;
+    }
+
+    public SendMessage whenMenu(Update update) {
+        String chatId = getChatId(update);
+        String language = getUserLanguage(chatId);
+        TgUser user = tgUserRepository.findByChatId(chatId);
+        if (user.getRole() == null) {
+            String role = update.getMessage().getText();
+            if (role.equals(getMessage(Message.CUSTOMER, language)))
+                user.setRole(roleRepository.findByName(RoleName.ROLE_CUSTOMER));
+            else
+                user.setRole(roleRepository.findByName(RoleName.ROLE_SELLER));
             tgUserRepository.save(user);
         }
 
@@ -323,4 +367,5 @@ public class MakeService {
 
         return markupInline;
     }
+
 }

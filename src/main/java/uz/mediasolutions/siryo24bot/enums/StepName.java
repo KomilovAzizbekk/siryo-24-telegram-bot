@@ -5,6 +5,6 @@ public enum StepName {
     INCORRECT_PHONE_FORMAT,
     ENTER_NAME,
     CHOOSE_FROM_MENU,
-    CHOOSE_LANG
+    CHOOSE_ROLE, CHOOSE_LANG
 
 }
