@@ -7,7 +7,6 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import uz.mediasolutions.siryo24bot.entity.TgUser;
-import uz.mediasolutions.siryo24bot.enums.LanguageName;
 import uz.mediasolutions.siryo24bot.enums.StepName;
 import uz.mediasolutions.siryo24bot.repository.TgUserRepository;
 import uz.mediasolutions.siryo24bot.utills.constants.Message;
@@ -21,12 +20,14 @@ public class TgService extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "siryo24bot";
+//        return "siryo24bot";
+        return "sakaka_bot";
     }
 
     @Override
     public String getBotToken() {
-        return "7174927353:AAFhxxnY8Hkgkx06QFG89UE-JWdhRhEMdDI";
+//        return "7174927353:AAFhxxnY8Hkgkx06QFG89UE-JWdhRhEMdDI";
+        return "6052104473:AAEscLILevwPMcG_00PYqAf-Kpb7eIUCIGg";
     }
 
     @SneakyThrows
@@ -60,7 +61,7 @@ public class TgService extends TelegramLongPollingBot {
                     execute(makeService.whenChooseRole(update));
                 } else if (makeService.getUserStep(chatId).equals(StepName.CHOOSE_ROLE) &&
                         (text.equals(makeService.getMessage(Message.SELLER, makeService.getUserLanguage(chatId))) ||
-                         text.equals(makeService.getMessage(Message.CUSTOMER, makeService.getUserLanguage(chatId))))) {
+                                text.equals(makeService.getMessage(Message.CUSTOMER, makeService.getUserLanguage(chatId))))) {
                     execute(makeService.whenMenu(update));
                 } else if (makeService.getUserStep(chatId).equals(StepName.CHOOSE_FROM_MENU) &&
                         text.equals(makeService.getMessage(Message.MENU_CATALOG, makeService.getUserLanguage(chatId)))) {
