@@ -110,6 +110,7 @@ public class MakeService {
         if (!tgUserRepository.existsByChatId(chatId)) {
             TgUser tgUser = TgUser.builder().chatId(chatId)
                     .banned(false)
+                    .username(getUsername(update))
                     .chatId(chatId)
                     .build();
             tgUserRepository.save(tgUser);

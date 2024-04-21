@@ -27,6 +27,9 @@ public class TgUser extends AbsLong {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
