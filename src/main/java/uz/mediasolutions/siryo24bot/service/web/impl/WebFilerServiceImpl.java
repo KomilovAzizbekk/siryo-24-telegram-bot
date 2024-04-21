@@ -8,6 +8,8 @@ import uz.mediasolutions.siryo24bot.entity.Seller;
 import uz.mediasolutions.siryo24bot.entity.TgUser;
 import uz.mediasolutions.siryo24bot.enums.LanguageName;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
+import uz.mediasolutions.siryo24bot.payload.web.CategoryWebDTO;
+import uz.mediasolutions.siryo24bot.payload.web.SellerWebDTO;
 import uz.mediasolutions.siryo24bot.repository.CategoryRepository;
 import uz.mediasolutions.siryo24bot.repository.ProductRepository;
 import uz.mediasolutions.siryo24bot.repository.SellerRepository;
@@ -28,17 +30,17 @@ public class WebFilerServiceImpl implements WebFilterService {
     @Override
     public ApiResult<List<?>> getCategory(String userId) {
         TgUser user = tgUserRepository.findByChatId(userId);
-        List<String> categoryNames = new ArrayList<>();
+        List<CategoryWebDTO> categoryWebDTOS = new ArrayList<>();
         List<Category> categories = categoryRepository.findAll();
         for (Category category : categories) {
             if (user.getLanguage().getName().equals(LanguageName.UZ)) {
-                categoryNames.add(category.getNameUz());
+                categoryWebDTOS.add(new CategoryWebDTO(category.getId(), category.getNameUz()));
             } else {
-                categoryNames.add(category.getNameRu());
+                categoryWebDTOS.add(new CategoryWebDTO(category.getId(), category.getNameRu()));
             }
         }
-        Collections.sort(categoryNames);
-        return ApiResult.success(categoryNames);
+        categoryWebDTOS.sort(Comparator.comparing(CategoryWebDTO::getName));
+        return ApiResult.success(categoryWebDTOS);
     }
 
     @Override
@@ -68,11 +70,22 @@ public class WebFilerServiceImpl implements WebFilterService {
     @Override
     public ApiResult<List<?>> getSeller() {
         List<Seller> sellers = sellerRepository.findAll();
-        List<String> sellerNames = new ArrayList<>();
+        List<SellerWebDTO> sellerWebDTOS = new ArrayList<>();
         for (Seller seller : sellers) {
-            sellerNames.add(seller.getOrganization());
+            sellerWebDTOS.add(new SellerWebDTO(seller.getId(), seller.getOrganization()));
         }
-        Collections.sort(sellerNames);
-        return ApiResult.success(sellerNames);
+        sellerWebDTOS.sort(Comparator.comparing(SellerWebDTO::getName));
+        return ApiResult.success(sellerWebDTOS);
+    }
+
+    @Override
+    public ApiResult<List<?>> getProductName(Long categoryId) {
+        List<Product> products = productRepository.findAllByCategoryId(categoryId);
+        List<String> productNames = new ArrayList<>();
+        for (Product product : products) {
+            productNames.add(product.getName());
+        }
+        Collections.sort(productNames);
+        return ApiResult.success(productNames);
     }
 }

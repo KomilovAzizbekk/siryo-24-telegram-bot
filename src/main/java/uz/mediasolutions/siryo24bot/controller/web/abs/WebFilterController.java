@@ -15,6 +15,7 @@ public interface WebFilterController {
     String GET_COUNTRY = "get-country";
     String GET_MANUFACTURER = "get-manufacturer";
     String GET_SELLER = "get-seller";
+    String GET_PRODUCT_NAME = "get-product-name/{categoryId}";
 
     @GetMapping(GET_CATEGORY)
     ApiResult<List<?>> getCategory(@RequestParam("user_id") String userId);
@@ -27,4 +28,7 @@ public interface WebFilterController {
 
     @GetMapping(GET_SELLER)
     ApiResult<List<?>> getSeller();
+
+    @GetMapping(GET_PRODUCT_NAME)
+    ApiResult<List<?>> getProductName(@PathVariable Long categoryId);
 }

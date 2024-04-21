@@ -14,4 +14,6 @@ public interface WebFilterService {
 
     ApiResult<List<?>> getSeller();
 
+    ApiResult<List<?>> getProductName(Long categoryId);
+
 }

@@ -7,10 +7,11 @@ import uz.mediasolutions.siryo24bot.payload.web.ProductWebDTO;
 
 public interface WebProductService {
 
-    ApiResult<Page<ProductWebDTO>> getAll(String userId, int page, int size, String name, String category, String country, String manufacturer, String seller);
+    ApiResult<Page<ProductWebDTO>> getAll(String userId, int page, int size, String search, Long category, String name, String country, String manufacturer, Long seller);
 
     ApiResult<ProductWeb2DTO> getById(Long id);
 
     ApiResult<?> addOrRemoveFavorites(Long id, String userId, boolean add);
 
+    ApiResult<Page<ProductWebDTO>> getFav(String userId, int page, int size);
 }

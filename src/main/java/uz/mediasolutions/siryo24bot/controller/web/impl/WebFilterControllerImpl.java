@@ -33,4 +33,9 @@ public class WebFilterControllerImpl implements WebFilterController {
     public ApiResult<List<?>> getSeller() {
         return webFilterService.getSeller();
     }
+
+    @Override
+    public ApiResult<List<?>> getProductName(Long categoryId) {
+        return webFilterService.getProductName(categoryId);
+    }
 }

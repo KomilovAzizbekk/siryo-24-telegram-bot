@@ -1,6 +1,8 @@
 package uz.mediasolutions.siryo24bot.mapper;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import uz.mediasolutions.siryo24bot.entity.*;
@@ -163,7 +165,7 @@ public class ProductMapperImpl implements ProductMapper {
         TgUser user = tgUserRepository.findByChatId(userId);
         if (user.getProducts() != null) {
             for (Product userProduct : user.getProducts()) {
-                if (userProduct.equals(product)) {
+                if (userProduct.getId().equals(product.getId())) {
                     favourite = true;
                     break;
                 }
@@ -214,6 +216,18 @@ public class ProductMapperImpl implements ProductMapper {
             analogProductWebDTOs.add(toAnalogProductWebDTO(product, userId));
         }
         return analogProductWebDTOs;
+    }
+
+    @Override
+    public Page<ProductWebDTO> toProductWebDTOPage(Page<Product> products, String userId) {
+        if (products == null) {
+            return null;
+        }
+        List<ProductWebDTO> productWebDTOs = new ArrayList<>();
+        for (Product product : products) {
+            productWebDTOs.add(toProductWebDTO(product, userId));
+        }
+        return new PageImpl<>(productWebDTOs);
     }
 
 }

@@ -16,8 +16,13 @@ public class WebProductControllerImpl implements WebProductController {
     private final WebProductService webProductService;
 
     @Override
-    public ApiResult<Page<ProductWebDTO>> getAll(String userId, int page, int size, String name, String category, String country, String manufacturer, String seller) {
-        return webProductService.getAll(userId, page, size, name, category, country, manufacturer, seller);
+    public ApiResult<Page<ProductWebDTO>> getAll(String userId, int page, int size, String search, Long category, String name, String country, String manufacturer, Long seller) {
+        return webProductService.getAll(userId, page, size, search, category, name, country, manufacturer, seller);
+    }
+
+    @Override
+    public ApiResult<Page<ProductWebDTO>> getFavourites(String userId, int page, int size) {
+        return webProductService.getFav(userId, page, size);
     }
 
     @Override
