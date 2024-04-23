@@ -4,25 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef7304d8-f99b-4bab-937a-cbab36f60f2d" name="Changes" comment="Userga username qoshildi!">
-      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/payload/web/CategoryWebDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/payload/web/SellerWebDTO.java" afterDir="false" />
+    <list default="true" id="ef7304d8-f99b-4bab-937a-cbab36f60f2d" name="Changes" comment="Web app uchun Product API lar tayyor qilindi">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/6e3d980a-678c-41dd-b4c4-43163124c3ec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6e3d980a-678c-41dd-b4c4-43163124c3ec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/web/abs/WebFilterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/web/abs/WebFilterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/web/abs/WebProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/web/abs/WebProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/web/impl/WebFilterControllerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/web/impl/WebFilterControllerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/web/impl/WebProductControllerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/web/impl/WebProductControllerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/ProductMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/ProductMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/ProductMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/abs/WebFilterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/abs/WebFilterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/abs/WebProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/abs/WebProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/impl/WebFilerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/impl/WebFilerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/impl/WebProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/impl/WebProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/TgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/TgService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +134,10 @@
       <workItem from="1713697954905" duration="265000" />
       <workItem from="1713724085374" duration="338000" />
       <workItem from="1713724441064" duration="137000" />
-      <workItem from="1713726473967" duration="9036000" />
+      <workItem from="1713726473967" duration="9182000" />
+      <workItem from="1713764339461" duration="81000" />
+      <workItem from="1713764656346" duration="499000" />
+      <workItem from="1713780629585" duration="173000" />
     </task>
     <task id="LOCAL-00001" summary="Bismillah! Started!">
       <option name="closed" value="true" />
@@ -238,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713724553598</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Web app uchun Product API lar tayyor qilindi">
+      <option name="closed" value="true" />
+      <created>1713735809456</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1713735809456</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,6 +251,7 @@
     <MESSAGE value="Role biriktirildi." />
     <MESSAGE value=".." />
     <MESSAGE value="Userga username qoshildi!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Userga username qoshildi!" />
+    <MESSAGE value="Web app uchun Product API lar tayyor qilindi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web app uchun Product API lar tayyor qilindi" />
   </component>
 </project>

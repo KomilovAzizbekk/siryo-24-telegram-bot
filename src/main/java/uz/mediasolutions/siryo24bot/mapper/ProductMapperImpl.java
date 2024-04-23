@@ -40,6 +40,8 @@ public class ProductMapperImpl implements ProductMapper {
                 .id(product.getId())
                 .seller(product.getSeller().getOrganization())
                 .name(product.getName())
+                .categoryId(product.getCategory().getId())
+                .sellerId(product.getSeller().getId())
                 .category(product.getCategory().getNameUz() + "/" + product.getCategory().getNameRu())
                 .country(product.getCountry())
                 .manufacturer(product.getManufacturer())

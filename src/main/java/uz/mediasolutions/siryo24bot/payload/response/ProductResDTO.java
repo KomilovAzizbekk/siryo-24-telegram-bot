@@ -23,6 +23,10 @@ public class ProductResDTO {
 
     private String category;
 
+    private Long categoryId;
+
+    private Long sellerId;
+
     private List<AlternativeDTO> alternativeNames;
 
     private String country;
