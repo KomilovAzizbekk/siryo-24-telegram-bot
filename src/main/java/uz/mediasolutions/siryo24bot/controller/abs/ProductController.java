@@ -8,6 +8,8 @@ import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
 import uz.mediasolutions.siryo24bot.utills.constants.Rest;
 
+import java.io.IOException;
+
 @RequestMapping(ProductController.PRODUCT)
 public interface ProductController {
 
@@ -30,8 +32,8 @@ public interface ProductController {
     ApiResult<?> add(@RequestBody ProductReqDTO dto);
 
     @PutMapping(EDIT)
-    ApiResult<?> edit(@RequestBody ProductReqDTO dto, @PathVariable Long id);
+    ApiResult<?> edit(@RequestBody ProductReqDTO dto, @PathVariable Long id) throws IOException;
 
     @DeleteMapping(DELETE)
-    ApiResult<?> delete(@PathVariable Long id);
+    ApiResult<?> delete(@PathVariable Long id) throws IOException;
 }

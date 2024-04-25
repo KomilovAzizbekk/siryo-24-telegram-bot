@@ -9,6 +9,8 @@ import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
 import uz.mediasolutions.siryo24bot.service.abs.ProductService;
 
+import java.io.IOException;
+
 @RestController
 @RequiredArgsConstructor
 public class ProductControllerImpl implements ProductController {
@@ -31,12 +33,12 @@ public class ProductControllerImpl implements ProductController {
     }
 
     @Override
-    public ApiResult<?> edit(ProductReqDTO dto, Long id) {
+    public ApiResult<?> edit(ProductReqDTO dto, Long id) throws IOException {
         return productService.edit(dto, id);
     }
 
     @Override
-    public ApiResult<?> delete(Long id) {
+    public ApiResult<?> delete(Long id) throws IOException {
         return productService.delete(id);
     }
 }

@@ -5,6 +5,8 @@ import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
 
+import java.io.IOException;
+
 public interface ProductService {
 
     ApiResult<Page<ProductResDTO>> getAll(int page, int size, String search);
@@ -13,8 +15,8 @@ public interface ProductService {
 
     ApiResult<?> add(ProductReqDTO dto);
 
-    ApiResult<?> edit(ProductReqDTO dto, Long id);
+    ApiResult<?> edit(ProductReqDTO dto, Long id) throws IOException;
 
-    ApiResult<?> delete(Long id);
+    ApiResult<?> delete(Long id) throws IOException;
 
 }

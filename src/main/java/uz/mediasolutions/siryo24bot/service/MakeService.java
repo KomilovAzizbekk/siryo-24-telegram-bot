@@ -139,6 +139,7 @@ public class MakeService {
         markup.setKeyboard(rowList);
         markup.setSelective(true);
         markup.setResizeKeyboard(true);
+        markup.setIsPersistent(true);
         return markup;
     }
 
@@ -181,6 +182,7 @@ public class MakeService {
         markup.setKeyboard(rowList);
         markup.setSelective(true);
         markup.setResizeKeyboard(true);
+        markup.setIsPersistent(true);
         return markup;
     }
 
@@ -278,6 +280,7 @@ public class MakeService {
         markup.setKeyboard(rowList);
         markup.setSelective(true);
         markup.setResizeKeyboard(true);
+        markup.setIsPersistent(true);
         return markup;
     }
 
@@ -335,6 +338,7 @@ public class MakeService {
         markup.setKeyboard(rowList);
         markup.setSelective(true);
         markup.setResizeKeyboard(true);
+        markup.setIsPersistent(true);
         return markup;
     }
 

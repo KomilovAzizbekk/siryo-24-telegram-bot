@@ -15,6 +15,10 @@ import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
 import uz.mediasolutions.siryo24bot.repository.*;
 import uz.mediasolutions.siryo24bot.service.abs.ProductService;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -59,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ApiResult<?> edit(ProductReqDTO dto, Long id) {
+    public ApiResult<?> edit(ProductReqDTO dto, Long id) throws IOException {
         //Getting product
         Product product = productRepository.findById(id).orElseThrow(
                 () -> RestException.restThrow("Product not found", HttpStatus.BAD_REQUEST));
@@ -100,6 +104,16 @@ public class ProductServiceImpl implements ProductService {
             }
         }
 
+        //Deleting old image if exists
+        String imageUrl = product.getImageUrl();
+        if (imageUrl != null) {
+            if (!Objects.equals(imageUrl, dto.getImageUrl())) {
+                String imagePath = "siryo-24-files/" + imageUrl.substring(imageUrl.lastIndexOf('/'));
+                Path path = Paths.get(imagePath);
+                Files.deleteIfExists(path);
+            }
+        }
+
         //Setting all fields
         product.setSeller(seller);
         product.setCategory(category);
@@ -117,7 +131,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ApiResult<?> delete(Long id) {
+    public ApiResult<?> delete(Long id) throws IOException {
+        Product product = productRepository.findById(id).orElseThrow(
+                () -> RestException.restThrow("Product not found", HttpStatus.BAD_REQUEST));
+        String imageUrl = product.getImageUrl();
+        if (imageUrl != null) {
+            String imagePath = "mitico-files/" + imageUrl.substring(imageUrl.lastIndexOf('/'));
+            Path path = Paths.get(imagePath);
+            Files.deleteIfExists(path);
+        }
         try {
             productRepository.deleteById(id);
             return ApiResult.success("Deleted successfully");
