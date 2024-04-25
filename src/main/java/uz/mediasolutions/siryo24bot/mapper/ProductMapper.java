@@ -9,6 +9,7 @@ import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
 import uz.mediasolutions.siryo24bot.payload.web.AnalogProductWebDTO;
 import uz.mediasolutions.siryo24bot.payload.web.ProductWeb2DTO;
+import uz.mediasolutions.siryo24bot.payload.web.ProductWeb3DTO;
 import uz.mediasolutions.siryo24bot.payload.web.ProductWebDTO;
 
 import java.util.List;
@@ -36,4 +37,8 @@ public interface ProductMapper {
     List<AnalogProductWebDTO> toAnalogProductWebDTOList(List<Product> products, String userId);
 
     Page<ProductWebDTO> toProductWebDTOPage(Page<Product> products, String userId);
+
+    ProductWeb3DTO toProductWeb3DTO(Product product);
+
+    List<ProductWeb3DTO> toProductWeb3DTOList(List<Product> products);
 }

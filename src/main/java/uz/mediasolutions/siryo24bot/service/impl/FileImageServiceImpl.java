@@ -78,7 +78,7 @@ public class FileImageServiceImpl implements FileImageService {
     }
 
     private String constructImageUrl(String fileName) {
-        String baseUrl = environment.getProperty("server.base-url", "http://localhost:8080" + Rest.BASE_PATH);
+        String baseUrl = environment.getProperty("server.base-url", "https://siryo24.medias.uz" + Rest.BASE_PATH);
         return baseUrl + "images/get/" + fileName;
     }
 }

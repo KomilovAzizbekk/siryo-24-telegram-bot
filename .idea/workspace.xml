@@ -4,10 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef7304d8-f99b-4bab-937a-cbab36f60f2d" name="Changes" comment="Web app uchun Product API lar tayyor qilindi">
+    <list default="true" id="ef7304d8-f99b-4bab-937a-cbab36f60f2d" name="Changes" comment="Product DTO ga sellerId va categoryId qoshildi!">
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/web/abs/WebApplicationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/web/impl/WebApplicationControllerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/ApplicationsMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/ApplicationsMapperImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/payload/web/ApplicationsWebReqDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/payload/web/ApplicationsWebResDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/payload/web/ProductWeb3DTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/payload/web/UserWebDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/repository/ApplicationsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/abs/WebApplicationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/impl/WebApplicationServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/6e3d980a-678c-41dd-b4c4-43163124c3ec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6e3d980a-678c-41dd-b4c4-43163124c3ec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/abs/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/controller/abs/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Applications.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Applications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/ProductMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/ProductMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/ProductMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/TgUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/mapper/TgUserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/TgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/TgService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/impl/FileImageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/impl/FileImageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/impl/WebFilerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/service/web/impl/WebFilerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/utills/constants/Rest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uz/mediasolutions/siryo24bot/utills/constants/Rest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,11 +115,11 @@
       <recent name="D:\Java\siyo-24-bot\src\main\java\uz\mediasolutions\siyo24bot" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="uz.mediasolutions.siryo24bot.payload.web" />
-      <recent name="uz.mediasolutions.siryo24bot.controller.web.abs" />
-      <recent name="uz.mediasolutions.siryo24bot.payload" />
       <recent name="uz.mediasolutions.siryo24bot.mapper" />
-      <recent name="uz.mediasolutions.siryo24bot.controller.abs" />
+      <recent name="uz.mediasolutions.siryo24bot.repository" />
+      <recent name="uz.mediasolutions.siryo24bot.payload.web" />
+      <recent name="uz.mediasolutions.siryo24bot.entity" />
+      <recent name="uz.mediasolutions.siryo24bot.controller.web.abs" />
     </key>
   </component>
   <component name="RunManager">
@@ -138,6 +159,13 @@
       <workItem from="1713764339461" duration="81000" />
       <workItem from="1713764656346" duration="499000" />
       <workItem from="1713780629585" duration="173000" />
+      <workItem from="1713843461227" duration="438000" />
+      <workItem from="1713896157146" duration="1403000" />
+      <workItem from="1713935865404" duration="656000" />
+      <workItem from="1713941767883" duration="1173000" />
+      <workItem from="1713944871435" duration="373000" />
+      <workItem from="1713977897942" duration="7325000" />
+      <workItem from="1714056357785" duration="5298000" />
     </task>
     <task id="LOCAL-00001" summary="Bismillah! Started!">
       <option name="closed" value="true" />
@@ -235,7 +263,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713735809456</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Product DTO ga sellerId va categoryId qoshildi!">
+      <option name="closed" value="true" />
+      <created>1713843633131</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713843633131</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,6 +288,7 @@
     <MESSAGE value=".." />
     <MESSAGE value="Userga username qoshildi!" />
     <MESSAGE value="Web app uchun Product API lar tayyor qilindi" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web app uchun Product API lar tayyor qilindi" />
+    <MESSAGE value="Product DTO ga sellerId va categoryId qoshildi!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Product DTO ga sellerId va categoryId qoshildi!" />
   </component>
 </project>

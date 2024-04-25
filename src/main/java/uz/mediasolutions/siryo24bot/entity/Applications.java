@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import uz.mediasolutions.siryo24bot.entity.template.AbsLong;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,8 +24,8 @@ public class Applications extends AbsLong {
     @ManyToOne(fetch = FetchType.LAZY)
     private TgUser user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Product product;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Product> products;
 
     @Column(name = "comment", columnDefinition = "text")
     private String comment;

@@ -52,7 +52,4 @@ public class Product extends AbsLong {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Product> analogs;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Applications> applications;
-
 }

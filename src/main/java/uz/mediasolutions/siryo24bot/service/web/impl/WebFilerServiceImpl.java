@@ -9,6 +9,7 @@ import uz.mediasolutions.siryo24bot.entity.TgUser;
 import uz.mediasolutions.siryo24bot.enums.LanguageName;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.payload.web.CategoryWebDTO;
+import uz.mediasolutions.siryo24bot.payload.web.ProductWeb3DTO;
 import uz.mediasolutions.siryo24bot.payload.web.SellerWebDTO;
 import uz.mediasolutions.siryo24bot.repository.CategoryRepository;
 import uz.mediasolutions.siryo24bot.repository.ProductRepository;
@@ -81,11 +82,11 @@ public class WebFilerServiceImpl implements WebFilterService {
     @Override
     public ApiResult<List<?>> getProductName(Long categoryId) {
         List<Product> products = productRepository.findAllByCategoryId(categoryId);
-        List<String> productNames = new ArrayList<>();
+        List<ProductWeb3DTO> productWeb3DTOS = new ArrayList<>();
         for (Product product : products) {
-            productNames.add(product.getName());
+            productWeb3DTOS.add(new ProductWeb3DTO(product.getId(), product.getName()));
         }
-        Collections.sort(productNames);
-        return ApiResult.success(productNames);
+        productWeb3DTOS.sort(Comparator.comparing(ProductWeb3DTO::getName));
+        return ApiResult.success(productWeb3DTOS);
     }
 }

@@ -14,6 +14,7 @@ import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
 import uz.mediasolutions.siryo24bot.payload.web.AnalogProductWebDTO;
 import uz.mediasolutions.siryo24bot.payload.web.ProductWeb2DTO;
+import uz.mediasolutions.siryo24bot.payload.web.ProductWeb3DTO;
 import uz.mediasolutions.siryo24bot.payload.web.ProductWebDTO;
 import uz.mediasolutions.siryo24bot.repository.*;
 
@@ -230,6 +231,31 @@ public class ProductMapperImpl implements ProductMapper {
             productWebDTOs.add(toProductWebDTO(product, userId));
         }
         return new PageImpl<>(productWebDTOs);
+    }
+
+    @Override
+    public ProductWeb3DTO toProductWeb3DTO(Product product) {
+        if (product == null) {
+            return null;
+        }
+
+        return ProductWeb3DTO.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .build();
+    }
+
+    @Override
+    public List<ProductWeb3DTO> toProductWeb3DTOList(List<Product> products) {
+        if (products == null) {
+            return null;
+        }
+
+        List<ProductWeb3DTO> productWeb3DTOs = new ArrayList<>();
+        for (Product product : products) {
+            productWeb3DTOs.add(toProductWeb3DTO(product));
+        }
+        return productWeb3DTOs;
     }
 
 }
