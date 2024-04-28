@@ -136,7 +136,7 @@ public class ProductServiceImpl implements ProductService {
                 () -> RestException.restThrow("Product not found", HttpStatus.BAD_REQUEST));
         String imageUrl = product.getImageUrl();
         if (imageUrl != null) {
-            String imagePath = "mitico-files/" + imageUrl.substring(imageUrl.lastIndexOf('/'));
+            String imagePath = "siryo-24-files/" + imageUrl.substring(imageUrl.lastIndexOf('/'));
             Path path = Paths.get(imagePath);
             Files.deleteIfExists(path);
         }
