@@ -324,7 +324,7 @@ public class MakeService {
         button4.setText(getMessage(Message.MENU_INSTRUCTION, language));
         button5.setText(getMessage(Message.MENU_SUG_COMP, language));
 
-        button3.setWebApp(new WebAppInfo(WEB_URL + "/request" + chatId + "/" + language));
+        button3.setWebApp(new WebAppInfo(WEB_URL + "/request/" + chatId + "/" + language));
 
         row1.add(button1);
         row1.add(button2);
@@ -360,7 +360,7 @@ public class MakeService {
 
         button1.setText(getMessage(Message.MENU_CATALOG, language));
 
-        button1.setWebApp(new WebAppInfo(WEB_URL + "/catalog" + "/" + chatId + "/" + language));
+        button1.setWebApp(new WebAppInfo(WEB_URL + "/catalog/" + chatId + "/" + language));
 
         List<InlineKeyboardButton> row1 = new ArrayList<>();
 
