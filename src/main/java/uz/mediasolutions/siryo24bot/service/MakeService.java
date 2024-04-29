@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -37,6 +39,7 @@ public class MakeService {
     private final LanguageRepository languageRepository;
     private final RoleRepository roleRepository;
 
+    private final String SUG_COMP_CHANNEL = "-1002072753264";
     private final String WEB_URL = "https://siryo24-bot-web-app.netlify.app";
 
     public String getMessage(String key, String language) {
@@ -353,6 +356,7 @@ public class MakeService {
 
     private InlineKeyboardMarkup forCatalog(String chatId) {
         String language = getUserLanguage(chatId);
+
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
 
@@ -373,4 +377,259 @@ public class MakeService {
         return markupInline;
     }
 
+    public SendMessage whenInstruction(Update update) {
+        String chatId = getChatId(update);
+        String language = getUserLanguage(chatId);
+
+        return new SendMessage(chatId, getMessage(Message.TELEGRAPH_INSTRUCTION_LINK, language));
+    }
+
+    public SendMessage whenSuggestComplaint(Update update) {
+        String chatId = getChatId(update);
+        String language = getUserLanguage(chatId);
+
+        SendMessage sendMessage = new SendMessage(chatId, getMessage(Message.SEND_SUG_COMP, language));
+        sendMessage.setReplyMarkup(new ReplyKeyboardRemove(true));
+        setUserStep(chatId, StepName.SEND_SUGG_COMP);
+        return sendMessage;
+    }
+
+    public SendMessage whenSendSugCompUser(Update update) {
+        String chatId = getChatId(update);
+        String language = getUserLanguage(chatId);
+
+        SendMessage sendMessage = new SendMessage(chatId, getMessage(Message.RESPONSE_SUG_COMP, language));
+        sendMessage.setReplyMarkup(forMenu(chatId));
+        setUserStep(chatId, StepName.CHOOSE_FROM_MENU);
+        return sendMessage;
+    }
+
+    public SendMessage whenSendSugCompChannel(Update update) {
+        String chatId = getChatId(update);
+        String language = getUserLanguage(chatId);
+        String text = update.getMessage().getText();
+        TgUser user = tgUserRepository.findByChatId(chatId);
+        String name = user.getName();
+        if (user.getUsername() != null) {
+            name = String.format("<a href =\"https://t.me/%s\">%s</a>", user.getUsername(), user.getName());
+        }
+
+        SendMessage sendMessage = new SendMessage(SUG_COMP_CHANNEL,
+                String.format(getMessage(Message.SUGGEST_COMPLAINT, language),
+                        name,
+                        user.getPhoneNumber(),
+                        user.getRole().getName().equals(RoleName.ROLE_CUSTOMER) ?
+                        getMessage(Message.CUSTOMER, language) : getMessage(Message.SELLER, language),
+                        text));
+        sendMessage.enableHtml(true);
+        return sendMessage;
+    }
+
+    public SendMessage whenSettings1(Update update) {
+        String chatId = getChatId(update);
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(getMessage(Message.SETTINGS, getUserLanguage(chatId)));
+        sendMessage.setReplyMarkup(new ReplyKeyboardRemove(true));
+        return sendMessage;
+    }
+
+    public SendMessage whenSettings2(Update update) {
+        String chatId = getChatId(update);
+        TgUser tgUser = tgUserRepository.findByChatId(chatId);
+        String language = getUserLanguage(chatId);
+
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(
+                String.format(getMessage(Message.USER_INFO, language),
+                        tgUser.getName() != null ? tgUser.getName() : getMessage(Message.NOT_EXISTS, language),
+                        tgUser.getPhoneNumber() != null ? tgUser.getPhoneNumber() : getMessage(Message.NOT_EXISTS, language),
+                        tgUser.getRole() != null ? (tgUser.getRole().getName().equals(RoleName.ROLE_CUSTOMER) ?
+                                getMessage(Message.CUSTOMER, language) : getMessage(Message.SELLER, language)) : getMessage(Message.NOT_EXISTS, language),
+                        tgUser.getLanguage().getId() == 1 ?
+                                getMessage(Message.UZBEK, "UZ") :
+                                getMessage(Message.RUSSIAN, "UZ")));
+        sendMessage.setReplyMarkup(forSettings(update));
+        return sendMessage;
+    }
+
+    private InlineKeyboardMarkup forSettings(Update update) {
+        String chatId = getChatId(update);
+        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+
+        InlineKeyboardButton button1 = new InlineKeyboardButton();
+        InlineKeyboardButton button2 = new InlineKeyboardButton();
+        InlineKeyboardButton button3 = new InlineKeyboardButton();
+        InlineKeyboardButton button4 = new InlineKeyboardButton();
+
+        button1.setText(getMessage(Message.CHANGE_NAME, getUserLanguage(chatId)));
+        button2.setText(getMessage(Message.CHANGE_PHONE_NUMBER, getUserLanguage(chatId)));
+        button3.setText(getMessage(Message.CHANGE_ROLE, getUserLanguage(chatId)));
+        button4.setText(getMessage(Message.CHANGE_LANGUAGE, getUserLanguage(chatId)));
+
+        button1.setCallbackData("changeName");
+        button2.setCallbackData("changePhone");
+        button3.setCallbackData("changeRole");
+        button4.setCallbackData("changeLanguage");
+
+        List<InlineKeyboardButton> row1 = new ArrayList<>();
+        List<InlineKeyboardButton> row2 = new ArrayList<>();
+        List<InlineKeyboardButton> row3 = new ArrayList<>();
+        List<InlineKeyboardButton> row4 = new ArrayList<>();
+
+        row1.add(button1);
+        row2.add(button2);
+        row3.add(button3);
+        row4.add(button4);
+
+        rowsInline.add(row1);
+        rowsInline.add(row2);
+        rowsInline.add(row3);
+        rowsInline.add(row4);
+
+        markupInline.setKeyboard(rowsInline);
+
+        return markupInline;
+    }
+
+    public EditMessageText whenChangeName1(Update update) {
+        String chatId = getChatId(update);
+        EditMessageText editMessageText = new EditMessageText();
+        editMessageText.setChatId(chatId);
+        editMessageText.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
+        editMessageText.setText(getMessage(Message.ENTER_NAME, getUserLanguage(chatId)));
+        setUserStep(chatId, StepName.CHANGE_NAME);
+        return editMessageText;
+    }
+
+    public SendMessage whenChangeName2(Update update) {
+        String chatId = getChatId(update);
+        TgUser tgUser = tgUserRepository.findByChatId(chatId);
+        tgUser.setName(update.getMessage().getText());
+
+        tgUserRepository.save(tgUser);
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(getMessage(Message.NAME_CHANGED, getUserLanguage(chatId)));
+        sendMessage.setReplyMarkup(forMenu(chatId));
+        setUserStep(chatId, StepName.CHOOSE_FROM_MENU);
+        return sendMessage;
+    }
+
+    public SendMessage whenChangePhoneNumber1(Update update) {
+        String chatId = getChatId(update);
+        String language = getUserLanguage(chatId);
+        SendMessage sendMessage = new SendMessage(chatId, getMessage(Message.ENTER_PHONE_NUMBER, getUserLanguage(chatId)));
+        sendMessage.setReplyMarkup(forPhoneNumber(language));
+        setUserStep(chatId, StepName.CHANGE_PHONE_NUMBER);
+        return sendMessage;
+    }
+
+    public SendMessage whenChangePhoneNumber2(Update update) {
+        String chatId = getChatId(update);
+        String language = getUserLanguage(chatId);
+        TgUser tgUser = tgUserRepository.findByChatId(chatId);
+
+        if (update.getMessage().hasText()) {
+            if (isValidPhoneNumber(update.getMessage().getText())) {
+                String phoneNumber = update.getMessage().getText();
+                tgUser.setPhoneNumber(phoneNumber);
+                tgUserRepository.save(tgUser);
+                return executeChangePhoneNumber(update);
+            } else {
+                SendMessage sendMessage = new SendMessage(getChatId(update),
+                        getMessage(Message.INCORRECT_PHONE_FORMAT, getUserLanguage(chatId)));
+                sendMessage.setReplyMarkup(forPhoneNumber(language));
+                setUserStep(chatId, StepName.INCORRECT_PHONE_FORMAT_1);
+                return sendMessage;
+            }
+        } else {
+            String phoneNumber = update.getMessage().getContact().getPhoneNumber();
+            phoneNumber = phoneNumber.startsWith("+") ? phoneNumber : "+" + phoneNumber;
+            tgUser.setPhoneNumber(phoneNumber);
+            tgUserRepository.save(tgUser);
+            return executeChangePhoneNumber(update);
+        }
+    }
+
+    public SendMessage whenIncorrectPhoneFormat1(Update update) {
+        return whenChangePhoneNumber2(update);
+    }
+
+
+    private SendMessage executeChangePhoneNumber(Update update) {
+        String chatId = getChatId(update);
+
+        SendMessage sendMessage = new SendMessage(chatId, getMessage(Message.PHONE_NUMBER_CHANGED,
+                getUserLanguage(chatId)));
+        sendMessage.setReplyMarkup(forMenu(chatId));
+        setUserStep(chatId, StepName.CHOOSE_FROM_MENU);
+        return sendMessage;
+    }
+
+    public DeleteMessage deleteMessageForCallback(Update update) {
+        DeleteMessage deleteMessage = new DeleteMessage();
+        deleteMessage.setChatId(getChatId(update));
+        deleteMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
+        return deleteMessage;
+    }
+
+    public SendMessage whenChangeLanguage1(Update update) {
+        String chatId = getChatId(update);
+        SendMessage sendMessage = new SendMessage(chatId,
+                getMessage(Message.LANG_SAME_FOR_2_LANG, getUserLanguage(chatId)));
+        sendMessage.setReplyMarkup(forStart());
+        setUserStep(chatId, StepName.CHANGE_LANGUAGE);
+        return sendMessage;
+    }
+
+    public SendMessage whenChangeLanguage2(Update update) {
+        String chatId = getChatId(update);
+        TgUser tgUser = tgUserRepository.findByChatId(chatId);
+
+        if (update.getMessage().getText().equals(
+                getMessage(Message.UZBEK, getUserLanguage(chatId)))) {
+            tgUser.setLanguage(languageRepository.findByName(LanguageName.UZ));
+        } else if (update.getMessage().getText().equals(
+                getMessage(Message.RUSSIAN, getUserLanguage(chatId)))) {
+            tgUser.setLanguage(languageRepository.findByName(LanguageName.RU));
+        }
+        tgUserRepository.save(tgUser);
+        SendMessage sendMessage = new SendMessage(chatId,
+                getMessage(Message.LANGUAGE_CHANGED, getUserLanguage(chatId)));
+        sendMessage.setReplyMarkup(forMenu(chatId));
+        setUserStep(chatId, StepName.CHOOSE_FROM_MENU);
+        return sendMessage;
+    }
+
+    public SendMessage whenChangeRole1(Update update) {
+        String chatId = getChatId(update);
+        String language = getUserLanguage(chatId);
+
+        SendMessage sendMessage = new SendMessage(chatId, getMessage(Message.MSG_CHANGE_ROLE, language));
+        sendMessage.setReplyMarkup(forChooseRole(chatId));
+        setUserStep(chatId, StepName.CHANGE_ROLE);
+        return sendMessage;
+    }
+
+    public SendMessage whenChangeRole2(Update update) {
+        String chatId = getChatId(update);
+        String language = getUserLanguage(chatId);
+        String role = update.getMessage().getText();
+        TgUser user = tgUserRepository.findByChatId(chatId);
+
+        if (role.equals(getMessage(Message.SELLER, language))) {
+            user.setRole(roleRepository.findByName(RoleName.ROLE_SELLER));
+        } else {
+            user.setRole(roleRepository.findByName(RoleName.ROLE_CUSTOMER));
+        }
+        tgUserRepository.save(user);
+
+        SendMessage sendMessage = new SendMessage(chatId, getMessage(Message.ROLE_CHANGED, language));
+        sendMessage.setReplyMarkup(forMenu(chatId));
+        setUserStep(chatId, StepName.CHOOSE_FROM_MENU);
+        return sendMessage;
+    }
 }
