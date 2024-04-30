@@ -226,11 +226,13 @@ public class ProductMapperImpl implements ProductMapper {
         if (products == null) {
             return null;
         }
+
         List<ProductWebDTO> productWebDTOs = new ArrayList<>();
         for (Product product : products) {
             productWebDTOs.add(toProductWebDTO(product, userId));
         }
-        return new PageImpl<>(productWebDTOs);
+
+        return new PageImpl<>(productWebDTOs, products.getPageable(), products.getTotalElements());
     }
 
     @Override

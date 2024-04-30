@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import uz.mediasolutions.siryo24bot.entity.Product;
 import uz.mediasolutions.siryo24bot.entity.TgUser;
-import uz.mediasolutions.siryo24bot.enums.LanguageName;
 import uz.mediasolutions.siryo24bot.exceptions.RestException;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.mapper.ProductMapper;
@@ -17,11 +16,11 @@ import uz.mediasolutions.siryo24bot.payload.web.ProductWeb2DTO;
 import uz.mediasolutions.siryo24bot.payload.web.ProductWebDTO;
 import uz.mediasolutions.siryo24bot.repository.ProductRepository;
 import uz.mediasolutions.siryo24bot.repository.TgUserRepository;
+import uz.mediasolutions.siryo24bot.service.web.PageableConverter;
 import uz.mediasolutions.siryo24bot.service.web.abs.WebProductService;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
 
 @Service
 @RequiredArgsConstructor
@@ -30,11 +29,11 @@ public class WebProductServiceImpl implements WebProductService {
     private final ProductRepository productRepository;
     private final TgUserRepository tgUserRepository;
     private final ProductMapper productMapper;
+    private final PageableConverter pageableConverter;
 
     @Override
     public ApiResult<Page<ProductWebDTO>> getAll(String userId, int page, int size, String search, Long category, String name, String country, String manufacturer, Long seller) {
         Pageable pageable = PageRequest.of(page, size);
-        TgUser user = tgUserRepository.findByChatId(userId);
         Page<ProductWebDTO> dtos = null;
 
         if (search == null && category == null && country == null && manufacturer == null &&
@@ -88,26 +87,10 @@ public class WebProductServiceImpl implements WebProductService {
         TgUser user = tgUserRepository.findByChatId(userId);
         List<Product> products = user.getProducts();
         Pageable pageable = PageRequest.of(page, size);
-        Page<Product> convert = convert(products, pageable);
+        Page<Product> convert = pageableConverter.convert(products, pageable);
         Page<ProductWebDTO> dtos = productMapper.toProductWebDTOPage(convert, userId);
         return ApiResult.success(dtos);
     }
 
-    public static <T> Page<T> convert(List<T> list, Pageable pageable) {
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-
-        List<T> pageList;
-
-        if (list.size() < startItem) {
-            pageList = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, list.size());
-            pageList = list.subList(startItem, toIndex);
-        }
-
-        return new PageImpl<>(pageList, pageable, list.size());
-    }
 
 }
