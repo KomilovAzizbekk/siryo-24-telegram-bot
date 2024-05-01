@@ -25,7 +25,8 @@ public interface WebProductController {
                                           @RequestParam(required = false) String name,
                                           @RequestParam(required = false) String country,
                                           @RequestParam(required = false) String manufacturer,
-                                          @RequestParam(required = false) Long seller);
+                                          @RequestParam(required = false) Long seller,
+                                          @RequestParam(defaultValue = "false") boolean stockMarket);
 
     @GetMapping(GET_FAVOURITES)
     ApiResult<Page<ProductWebDTO>> getFavourites(@PathVariable String userId,

@@ -27,6 +27,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "  AND (:country IS NULL OR p.country = :country)\n" +
             "  AND (:manufacturer IS NULL OR p.manufacturer = :manufacturer)\n" +
             "  AND (:seller IS NULL OR p.seller_id = :seller)\n" +
+            "  AND s.stock_market = :stock_market\n" +
             "  AND s.active = true", nativeQuery = true)
     Page<Product> findAllByCategoryAndNameAndCountryAndManufacturerAndSeller(
             @Param("category") Long category,
@@ -34,6 +35,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("country") String country,
             @Param("manufacturer") String manufacturer,
             @Param("seller") Long seller,
+            @Param("stock_market") boolean stockMarket,
             Pageable pageable
     );
 

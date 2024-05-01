@@ -7,7 +7,7 @@ import uz.mediasolutions.siryo24bot.payload.web.ProductWebDTO;
 
 public interface WebProductService {
 
-    ApiResult<Page<ProductWebDTO>> getAll(String userId, int page, int size, String search, Long category, String name, String country, String manufacturer, Long seller);
+    ApiResult<Page<ProductWebDTO>> getAll(String userId, int page, int size, String search, Long category, String name, String country, String manufacturer, Long seller, boolean stockMarket);
 
     ApiResult<ProductWeb2DTO> getById(Long id);
 

@@ -45,6 +45,9 @@ public class Seller extends AbsLong {
     @Column(name = "accept_cash")
     private boolean acceptCash;
 
+    @Column(name = "stock_market")
+    private boolean stockMarket;
+
     @Column(name = "accept_transfer")
     private boolean acceptTransfer;
 

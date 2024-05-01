@@ -31,4 +31,6 @@ public class SellerDTO {
 
     private boolean acceptTransfer;
 
+    private boolean stockMarket;
+
 }

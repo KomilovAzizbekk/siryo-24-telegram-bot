@@ -76,6 +76,7 @@ public class SellerServiceImpl implements SellerService {
         seller.setChatId(dto.getChatId());
         seller.setActive(dto.isActive());
         seller.setChannel(dto.getChannel());
+        seller.setStockMarket(dto.isStockMarket());
         seller.setAcceptCash(dto.isAcceptCash());
         seller.setAcceptTransfer(dto.isAcceptTransfer());
         sellerRepository.save(seller);

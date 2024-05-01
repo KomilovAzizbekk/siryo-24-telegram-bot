@@ -2,7 +2,6 @@ package uz.mediasolutions.siryo24bot.service.web.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,6 @@ import uz.mediasolutions.siryo24bot.service.web.PageableConverter;
 import uz.mediasolutions.siryo24bot.service.web.abs.WebProductService;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -33,7 +31,7 @@ public class WebProductServiceImpl implements WebProductService {
     private final PageableConverter pageableConverter;
 
     @Override
-    public ApiResult<Page<ProductWebDTO>> getAll(String userId, int page, int size, String search, Long category, String name, String country, String manufacturer, Long seller) {
+    public ApiResult<Page<ProductWebDTO>> getAll(String userId, int page, int size, String search, Long category, String name, String country, String manufacturer, Long seller, boolean stockMarket) {
         Pageable pageable = PageRequest.of(page, size);
         Page<ProductWebDTO> dtos = null;
 
@@ -46,7 +44,7 @@ public class WebProductServiceImpl implements WebProductService {
         else if (category != null || name != null || country != null ||
                 manufacturer != null || seller != null) {
             Page<Product> products = productRepository.findAllByCategoryAndNameAndCountryAndManufacturerAndSeller(
-                    category, name, country, manufacturer, seller, pageable);
+                    category, name, country, manufacturer, seller, stockMarket, pageable);
             dtos = productMapper.toProductWebDTOPage(products, userId);
 
         }
