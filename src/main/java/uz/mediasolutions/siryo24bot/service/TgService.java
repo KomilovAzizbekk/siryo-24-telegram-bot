@@ -2,14 +2,20 @@ package uz.mediasolutions.siryo24bot.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import uz.mediasolutions.siryo24bot.entity.Applications;
 import uz.mediasolutions.siryo24bot.entity.TgUser;
 import uz.mediasolutions.siryo24bot.enums.StepName;
+import uz.mediasolutions.siryo24bot.exceptions.RestException;
+import uz.mediasolutions.siryo24bot.repository.ApplicationsRepository;
 import uz.mediasolutions.siryo24bot.repository.TgUserRepository;
 import uz.mediasolutions.siryo24bot.utills.constants.Message;
+
+import java.time.format.DateTimeFormatter;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +23,7 @@ public class TgService extends TelegramLongPollingBot {
 
     private final MakeService makeService;
     private final TgUserRepository tgUserRepository;
+    private final ApplicationsRepository applicationsRepository;
 
     @Override
     public String getBotUsername() {
@@ -121,4 +128,34 @@ public class TgService extends TelegramLongPollingBot {
             }
         }
     }
+
+    public SendMessage sendApplicationToChannel(Long appId, String chatId) {
+        String APP_CHANNEL = "-1002073516469";
+        String language = makeService.getUserLanguage(chatId);
+        TgUser user = tgUserRepository.findByChatId(chatId);
+        Applications applications = applicationsRepository.findById(appId).orElseThrow(
+                () -> RestException.restThrow("Application not found", HttpStatus.BAD_REQUEST));
+
+        StringBuilder productNames = new StringBuilder();
+        for (int i = 0; i < applications.getProducts().size(); i++) {
+            if (i != applications.getProducts().size() - 1) {
+                productNames.append(applications.getProducts().get(i).getName()).append(", ");
+            } else {
+                productNames.append(applications.getProducts().get(i).getName());
+            }
+        }
+
+        SendMessage sendMessage = new SendMessage(APP_CHANNEL,
+                String.format(makeService.getMessage(Message.APPLICATION_MSG, language),
+                        appId,
+                        user.getName(),
+                        user.getPhoneNumber(),
+                        productNames,
+                        applications.getCreatedAt().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")),
+                        applications.getComment()
+                        ));
+        sendMessage.enableHtml(true);
+        return sendMessage;
+    }
+
 }

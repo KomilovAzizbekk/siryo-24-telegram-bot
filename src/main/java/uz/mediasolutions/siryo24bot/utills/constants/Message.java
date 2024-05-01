@@ -41,4 +41,5 @@ public interface Message {
     String CHANGE_ROLE = "change.role";
     String ROLE_CHANGED = "role.changed";
     String MSG_CHANGE_ROLE = "msg.change.role";
+    String APPLICATION_MSG = "application.msg";
 }

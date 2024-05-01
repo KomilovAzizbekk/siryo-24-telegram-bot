@@ -39,7 +39,6 @@ public class MakeService {
     private final LanguageRepository languageRepository;
     private final RoleRepository roleRepository;
 
-    private final String SUG_COMP_CHANNEL = "-1002072753264";
     private final String WEB_URL = "https://siryo24-bot-web-app.netlify.app";
 
     public String getMessage(String key, String language) {
@@ -415,6 +414,7 @@ public class MakeService {
             name = String.format("<a href =\"https://t.me/%s\">%s</a>", user.getUsername(), user.getName());
         }
 
+        String SUG_COMP_CHANNEL = "-1002072753264";
         SendMessage sendMessage = new SendMessage(SUG_COMP_CHANNEL,
                 String.format(getMessage(Message.SUGGEST_COMPLAINT, language),
                         name,

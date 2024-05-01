@@ -15,9 +15,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findAllBySellerActiveIsTrueOrderByNameAsc(Pageable pageable);
 
-    Page<Product> findAllByOrderByNameAsc(Pageable pageable);
+    Page<Product> findAllByUpdatesIsNotEmptyOrderByNameAsc(Pageable pageable);
 
-    Page<Product> findAllByNameContainsIgnoreCaseOrSellerOrganizationContainsIgnoreCaseOrderByNameAsc(String name, String org, Pageable pageable);
+    Page<Product> findAllByNameContainsIgnoreCaseOrSellerOrganizationContainsIgnoreCaseAndUpdatesIsNotEmptyOrderByNameAsc(String name, String org, Pageable pageable);
 
     @Query(value = "SELECT *\n" +
             "FROM products p\n" +

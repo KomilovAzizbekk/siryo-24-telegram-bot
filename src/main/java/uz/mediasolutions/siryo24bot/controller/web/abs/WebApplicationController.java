@@ -2,6 +2,7 @@ package uz.mediasolutions.siryo24bot.controller.web.abs;
 
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.payload.web.ApplicationsWebReqDTO;
 import uz.mediasolutions.siryo24bot.payload.web.ApplicationsWebResDTO;
@@ -23,7 +24,7 @@ public interface WebApplicationController {
 
     @PostMapping(ADD)
     ApiResult<?> add(@RequestBody ApplicationsWebReqDTO application,
-                     @PathVariable String userId);
+                     @PathVariable String userId) throws TelegramApiException;
 
     @DeleteMapping(DELETE)
     ApiResult<?> delete(@PathVariable Long id,

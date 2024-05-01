@@ -3,6 +3,7 @@ package uz.mediasolutions.siryo24bot.controller.web.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RestController;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import uz.mediasolutions.siryo24bot.controller.web.abs.WebApplicationController;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.payload.web.ApplicationsWebReqDTO;
@@ -21,7 +22,7 @@ public class WebApplicationControllerImpl implements WebApplicationController {
     }
 
     @Override
-    public ApiResult<?> add(ApplicationsWebReqDTO application, String userId) {
+    public ApiResult<?> add(ApplicationsWebReqDTO application, String userId) throws TelegramApiException {
         return webApplicationService.add(application, userId);
     }
 

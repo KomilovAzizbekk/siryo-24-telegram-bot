@@ -23,11 +23,11 @@ public class PriceHistoryServiceImpl implements PriceHistoryService {
     public ApiResult<Page<PriceHistoryDTO>> getAll(int page, int size, String search) {
         Pageable pageable = PageRequest.of(page, size);
         if (search != null && !search.isEmpty()) {
-            Page<Product> products = productRepository.findAllByNameContainsIgnoreCaseOrSellerOrganizationContainsIgnoreCaseOrderByNameAsc(search, search, pageable);
+            Page<Product> products = productRepository.findAllByNameContainsIgnoreCaseOrSellerOrganizationContainsIgnoreCaseAndUpdatesIsNotEmptyOrderByNameAsc(search, search, pageable);
             Page<PriceHistoryDTO> map = products.map(updatesMapper::toDTO);
             return ApiResult.success(map);
         } else {
-            Page<Product> products = productRepository.findAllByOrderByNameAsc(pageable);
+            Page<Product> products = productRepository.findAllByUpdatesIsNotEmptyOrderByNameAsc(pageable);
             Page<PriceHistoryDTO> map = products.map(updatesMapper::toDTO);
             return ApiResult.success(map);
         }

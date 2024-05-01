@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import uz.mediasolutions.siryo24bot.entity.Applications;
 import uz.mediasolutions.siryo24bot.entity.Product;
 import uz.mediasolutions.siryo24bot.exceptions.RestException;
@@ -17,6 +18,7 @@ import uz.mediasolutions.siryo24bot.payload.web.ProductWeb3DTO;
 import uz.mediasolutions.siryo24bot.repository.ApplicationsRepository;
 import uz.mediasolutions.siryo24bot.repository.ProductRepository;
 import uz.mediasolutions.siryo24bot.repository.TgUserRepository;
+import uz.mediasolutions.siryo24bot.service.TgService;
 import uz.mediasolutions.siryo24bot.service.web.abs.WebApplicationService;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class WebApplicationServiceImpl implements WebApplicationService {
     private final ApplicationsMapper applicationsMapper;
     private final TgUserRepository tgUserRepository;
     private final ProductRepository productRepository;
+    private final TgService tgService;
 
     @Override
     public ApiResult<Page<ApplicationsWebResDTO>> getAll(int page, int size, String userId, boolean mine) {
@@ -48,7 +51,7 @@ public class WebApplicationServiceImpl implements WebApplicationService {
     }
 
     @Override
-    public ApiResult<?> add(ApplicationsWebReqDTO application, String userId) {
+    public ApiResult<?> add(ApplicationsWebReqDTO application, String userId) throws TelegramApiException {
 
         List<Product> products = new ArrayList<>();
         for (ProductWeb3DTO product : application.getProducts()) {
@@ -61,7 +64,8 @@ public class WebApplicationServiceImpl implements WebApplicationService {
                 .comment(application.getComment())
                 .products(products)
                 .build();
-        applicationsRepository.save(applications);
+        Applications saved = applicationsRepository.save(applications);
+        tgService.execute(tgService.sendApplicationToChannel(saved.getId(), userId));
         return ApiResult.success("Saved successfully");
     }
 
