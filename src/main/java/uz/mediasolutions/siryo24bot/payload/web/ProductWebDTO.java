@@ -32,6 +32,8 @@ public class ProductWebDTO {
 
     private Integer price;
 
+    private String status;
+
     private String priceUpdatedTime;
 
     private List<AnalogProductWebDTO> analogs;

@@ -29,6 +29,8 @@ public class ProductReqDTO {
 
     private Integer price;
 
+    private Long statusId;
+
     private String imageUrl;
 
     private List<Long> analogs;

@@ -20,6 +20,11 @@ public class SellerControllerImpl implements SellerController {
     }
 
     @Override
+    public ApiResult<Page<SellerDTO>> getAllActive(int page, int size, String search) {
+        return sellerService.getAllActive(page, size, search);
+    }
+
+    @Override
     public ApiResult<SellerDTO> getById(Long id) {
         return sellerService.getById(id);
     }

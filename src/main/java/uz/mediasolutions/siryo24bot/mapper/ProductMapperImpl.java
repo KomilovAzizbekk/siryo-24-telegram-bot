@@ -31,6 +31,7 @@ public class ProductMapperImpl implements ProductMapper {
     private final AlternativeRepository alternativeRepository;
     private final ProductRepository productRepository;
     private final TgUserRepository tgUserRepository;
+    private final PriceStatusRepository priceStatusRepository;
 
     @Override
     public ProductResDTO toDTO(Product product) {
@@ -47,6 +48,7 @@ public class ProductMapperImpl implements ProductMapper {
                 .country(product.getCountry())
                 .manufacturer(product.getManufacturer())
                 .price(product.getPrice())
+                .status(product.getStatus() != null ? product.getStatus().getName().name() : null)
                 .imageUrl(product.getImageUrl())
                 .priceUpdatedTime(product.getPriceUpdatedTime() != null ?
                         product.getPriceUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")) : "")
@@ -136,6 +138,7 @@ public class ProductMapperImpl implements ProductMapper {
                 .country(dto.getCountry())
                 .manufacturer(dto.getManufacturer())
                 .price(dto.getPrice())
+                .status(priceStatusRepository.findById(dto.getStatusId()).orElse(null))
                 .imageUrl(dto.getImageUrl())
                 .priceUpdatedTime(null)
                 .analogs(products)
@@ -182,11 +185,13 @@ public class ProductMapperImpl implements ProductMapper {
                 .acceptTransfer(product.getSeller().isAcceptTransfer())
                 .favourite(favourite)
                 .name(product.getName())
+                .status(product.getStatus() != null ? product.getStatus().getName().name() : null)
                 .country(product.getCountry())
                 .manufacturer(product.getManufacturer())
                 .price(product.getPrice())
                 .priceUpdatedTime(product.getPriceUpdatedTime() != null ?
-                        product.getPriceUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")) : "")
+                        product.getPriceUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")) :
+                        product.getCreatedAt().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")))
                 .analogs(toAnalogProductWebDTOList(product.getAnalogs(), userId))
                 .analogsCount(toAnalogProductWebDTOList(product.getAnalogs(), userId).size())
                 .build();

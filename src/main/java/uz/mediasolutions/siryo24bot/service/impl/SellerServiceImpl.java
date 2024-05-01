@@ -36,6 +36,20 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
+    public ApiResult<Page<SellerDTO>> getAllActive(int page, int size, String search) {
+        Pageable pageable = PageRequest.of(page, size);
+        if (search == null || search.isEmpty()) {
+            Page<Seller> sellers = sellerRepository.findAllByActiveIsTrueOrderByCreatedAtDesc(pageable);
+            Page<SellerDTO> map = sellers.map(sellerMapper::toDTO);
+            return ApiResult.success(map);
+        } else {
+            Page<Seller> sellers = sellerRepository.findAllByOrganizationContainingIgnoreCaseAndActiveIsTrueOrderByCreatedAtDesc(search, pageable);
+            Page<SellerDTO> map = sellers.map(sellerMapper::toDTO);
+            return ApiResult.success(map);
+        }
+    }
+
+    @Override
     public ApiResult<SellerDTO> getById(Long id) {
         Seller seller = sellerRepository.findById(id).orElseThrow(
                 () -> RestException.restThrow("Seller not found", HttpStatus.BAD_REQUEST));
@@ -59,6 +73,7 @@ public class SellerServiceImpl implements SellerService {
         seller.setPhoneNumber1(dto.getPhoneNumber1());
         seller.setPhoneNumber2(dto.getPhoneNumber2());
         seller.setInfo(dto.getInfo());
+        seller.setChatId(dto.getChatId());
         seller.setActive(dto.isActive());
         seller.setChannel(dto.getChannel());
         seller.setAcceptCash(dto.isAcceptCash());

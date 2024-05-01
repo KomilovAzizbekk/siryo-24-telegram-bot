@@ -52,6 +52,9 @@ public class Product extends AbsLong {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Product> analogs;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PriceStatus status;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Updates> updates;
 

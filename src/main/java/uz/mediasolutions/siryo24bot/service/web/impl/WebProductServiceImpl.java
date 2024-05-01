@@ -19,6 +19,7 @@ import uz.mediasolutions.siryo24bot.repository.TgUserRepository;
 import uz.mediasolutions.siryo24bot.service.web.PageableConverter;
 import uz.mediasolutions.siryo24bot.service.web.abs.WebProductService;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class WebProductServiceImpl implements WebProductService {
 
         if (search == null && category == null && country == null && manufacturer == null &&
                 seller == null && name == null) {
-            Page<Product> products = productRepository.findAllByOrderByNameAsc(pageable);
+            Page<Product> products = productRepository.findAllBySellerActiveIsTrueOrderByNameAsc(pageable);
             dtos = productMapper.toProductWebDTOPage(products, userId);
         }
 
@@ -51,7 +52,7 @@ public class WebProductServiceImpl implements WebProductService {
         }
 
         else {
-            Page<Product> all = productRepository.findAllByNameContainingIgnoreCaseOrderByNameAsc(search, pageable);
+            Page<Product> all = productRepository.findAllByNameContainingIgnoreCaseAndSellerActiveIsTrueOrderByNameAsc(search, pageable);
             dtos = productMapper.toProductWebDTOPage(all, userId);
         }
         return ApiResult.success(dtos);
@@ -86,8 +87,14 @@ public class WebProductServiceImpl implements WebProductService {
     public ApiResult<Page<ProductWebDTO>> getFav(String userId, int page, int size) {
         TgUser user = tgUserRepository.findByChatId(userId);
         List<Product> products = user.getProducts();
+        List<Product> actives = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getSeller().isActive()) {
+                actives.add(product);
+            }
+        }
         Pageable pageable = PageRequest.of(page, size);
-        Page<Product> convert = pageableConverter.convert(products, pageable);
+        Page<Product> convert = pageableConverter.convert(actives, pageable);
         Page<ProductWebDTO> dtos = productMapper.toProductWebDTOPage(convert, userId);
         return ApiResult.success(dtos);
     }

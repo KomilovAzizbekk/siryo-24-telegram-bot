@@ -30,6 +30,9 @@ public class Seller extends AbsLong {
     @Column(name = "phone_number_2")
     private String phoneNumber2;
 
+    @Column(name = "chatId")
+    private String chatId;
+
     @Column(name = "info", columnDefinition = "text")
     private String info;
 

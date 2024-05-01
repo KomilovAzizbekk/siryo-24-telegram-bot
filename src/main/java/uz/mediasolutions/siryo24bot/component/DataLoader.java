@@ -29,6 +29,7 @@ public class DataLoader implements CommandLineRunner {
     private final LanguageRepositoryPs languageRepositoryPs;
     private final StepRepository stepRepository;
     private final LanguageRepository languageRepository;
+    private final PriceStatusRepository priceStatusRepository;
 
     @Value("${spring.sql.init.mode}")
     private String mode;
@@ -46,6 +47,14 @@ public class DataLoader implements CommandLineRunner {
             addUzLangValues();
             addRuLangValues();
             addLanguage();
+            addPriceStatus();
+        }
+    }
+
+    public void addPriceStatus() {
+        for (PriceStatusName value : PriceStatusName.values()) {
+            PriceStatus priceStatus = PriceStatus.builder().name(value).build();
+            priceStatusRepository.save(priceStatus);
         }
     }
 

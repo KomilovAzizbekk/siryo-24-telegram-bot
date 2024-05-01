@@ -11,4 +11,8 @@ public interface SellerRepository extends JpaRepository<Seller, Long> {
 
     Page<Seller> findAllByOrganizationContainingIgnoreCaseOrderByCreatedAtDesc(String org, Pageable pageable);
 
+    Page<Seller> findAllByActiveIsTrueOrderByCreatedAtDesc(Pageable pageable);
+
+    Page<Seller> findAllByOrganizationContainingIgnoreCaseAndActiveIsTrueOrderByCreatedAtDesc(String org, Pageable pageable);
+
 }

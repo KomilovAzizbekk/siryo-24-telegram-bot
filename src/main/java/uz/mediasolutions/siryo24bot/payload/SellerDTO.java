@@ -19,6 +19,8 @@ public class SellerDTO {
 
     private String phoneNumber2;
 
+    private String chatId;
+
     private String info;
 
     private boolean active;

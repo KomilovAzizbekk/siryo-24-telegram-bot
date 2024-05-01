@@ -8,10 +8,11 @@ public interface SellerService {
 
     ApiResult<Page<SellerDTO>> getAll(int page, int size, String search);
 
+    ApiResult<Page<SellerDTO>> getAllActive(int page, int size, String search);
+
     ApiResult<SellerDTO> getById(Long id);
 
     ApiResult<?> add(SellerDTO dto);
 
     ApiResult<?> edit(SellerDTO dto, Long id);
-
 }

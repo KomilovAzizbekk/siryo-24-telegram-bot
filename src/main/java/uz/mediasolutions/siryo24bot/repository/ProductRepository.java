@@ -11,18 +11,23 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    Page<Product> findAllByOrderByCreatedAtDesc(Pageable pageable);
+    Page<Product> findAllBySellerActiveIsTrueOrderByCreatedAtDesc(Pageable pageable);
+
+    Page<Product> findAllBySellerActiveIsTrueOrderByNameAsc(Pageable pageable);
 
     Page<Product> findAllByOrderByNameAsc(Pageable pageable);
 
-    Page<Product> findAllByNameContainingIgnoreCaseOrderByNameAsc(String name, Pageable pageable);
+    Page<Product> findAllByNameContainsIgnoreCaseOrSellerOrganizationContainsIgnoreCaseOrderByNameAsc(String name, String org, Pageable pageable);
 
-    @Query(value = "SELECT * FROM products p\n" +
-            "            WHERE (:category IS NULL OR p.category_id = :category)\n" +
-            "            AND (:name IS NULL OR p.name = :name)\n" +
-            "            AND (:country IS NULL OR p.country = :country)\n" +
-            "            AND (:manufacturer IS NULL OR p.manufacturer = :manufacturer)\n" +
-            "            AND (:seller IS NULL OR p.seller_id = :seller)", nativeQuery = true)
+    @Query(value = "SELECT *\n" +
+            "FROM products p\n" +
+            "         join public.sellers s on s.id = p.seller_id\n" +
+            "WHERE (:category IS NULL OR p.category_id = :category)\n" +
+            "  AND (:name IS NULL OR p.name = :name)\n" +
+            "  AND (:country IS NULL OR p.country = :country)\n" +
+            "  AND (:manufacturer IS NULL OR p.manufacturer = :manufacturer)\n" +
+            "  AND (:seller IS NULL OR p.seller_id = :seller)\n" +
+            "  AND s.active = true", nativeQuery = true)
     Page<Product> findAllByCategoryAndNameAndCountryAndManufacturerAndSeller(
             @Param("category") Long category,
             @Param("name") String name,
@@ -32,5 +37,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             Pageable pageable
     );
 
-    List<Product> findAllByCategoryId(Long categoryId);
+    List<Product> findAllByCategoryIdAndSellerActiveIsTrue(Long categoryId);
+
+    Page<Product> findAllByNameContainingIgnoreCaseAndSellerActiveIsTrueOrderByNameAsc(String search, Pageable pageable);
+
 }

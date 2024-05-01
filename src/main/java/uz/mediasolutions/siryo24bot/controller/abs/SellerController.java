@@ -12,6 +12,7 @@ public interface SellerController {
 
     String SELLER = Rest.BASE_PATH + "seller/";
     String GET_ALL = "get-all";
+    String GET_ALL_ACTIVE = "get-all-active";
     String GET_BY_ID = "get/{id}";
     String ADD = "add";
     String EDIT = "edit/{id}";
@@ -20,6 +21,11 @@ public interface SellerController {
     ApiResult<Page<SellerDTO>> getAll(@RequestParam(defaultValue = Rest.DEFAULT_PAGE_NUMBER) int page,
                                       @RequestParam(defaultValue = Rest.DEFAULT_PAGE_SIZE) int size,
                                       @RequestParam(required = false) String search);
+
+    @GetMapping(GET_ALL_ACTIVE)
+    ApiResult<Page<SellerDTO>> getAllActive(@RequestParam(defaultValue = Rest.DEFAULT_PAGE_NUMBER) int page,
+                                            @RequestParam(defaultValue = Rest.DEFAULT_PAGE_SIZE) int size,
+                                            @RequestParam(required = false) String search);
 
     @GetMapping(GET_BY_ID)
     ApiResult<SellerDTO> getById(@PathVariable Long id);

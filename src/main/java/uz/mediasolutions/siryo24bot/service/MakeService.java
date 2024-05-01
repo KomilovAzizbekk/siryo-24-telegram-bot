@@ -364,6 +364,7 @@ public class MakeService {
 
         button1.setText(getMessage(Message.MENU_CATALOG, language));
 
+        //https://siryo24-bot-web-app.netlify.app/catalog/12345678/UZ
         button1.setWebApp(new WebAppInfo(WEB_URL + "/catalog/" + chatId + "/" + language));
 
         List<InlineKeyboardButton> row1 = new ArrayList<>();

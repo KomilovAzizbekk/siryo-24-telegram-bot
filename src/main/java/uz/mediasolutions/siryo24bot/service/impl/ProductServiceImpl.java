@@ -32,16 +32,17 @@ public class ProductServiceImpl implements ProductService {
     private final SellerRepository sellerRepository;
     private final CategoryRepository categoryRepository;
     private final AlternativeRepository alternativeRepository;
+    private final PriceStatusRepository priceStatusRepository;
 
     @Override
     public ApiResult<Page<ProductResDTO>> getAll(int page, int size, String search) {
         Pageable pageable = PageRequest.of(page, size);
         if (search == null || search.isEmpty()) {
-            Page<Product> products = productRepository.findAllByOrderByCreatedAtDesc(pageable);
+            Page<Product> products = productRepository.findAllBySellerActiveIsTrueOrderByCreatedAtDesc(pageable);
             Page<ProductResDTO> map = products.map(productMapper::toDTO);
             return ApiResult.success(map);
         } else {
-            Page<Product> products = productRepository.findAllByNameContainingIgnoreCaseOrderByNameAsc(search, pageable);
+            Page<Product> products = productRepository.findAllByNameContainingIgnoreCaseAndSellerActiveIsTrueOrderByNameAsc(search, pageable);
             Page<ProductResDTO> map = products.map(productMapper::toDTO);
             return ApiResult.success(map);
         }
@@ -122,6 +123,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCountry(dto.getCountry());
         product.setManufacturer(dto.getManufacturer());
         product.setPrice(dto.getPrice());
+        product.setStatus(priceStatusRepository.findById(dto.getStatusId()).orElse(null));
         product.setImageUrl(dto.getImageUrl());
         product.setPriceUpdatedTime(!Objects.equals(product.getPrice(), dto.getPrice()) ?
                 new Timestamp(System.currentTimeMillis()) : null);

@@ -35,6 +35,8 @@ public class ProductResDTO {
 
     private Integer price;
 
+    private String status;
+
     private String imageUrl;
 
     private String priceUpdatedTime;

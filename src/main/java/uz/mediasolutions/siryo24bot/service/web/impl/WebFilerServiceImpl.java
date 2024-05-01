@@ -81,7 +81,7 @@ public class WebFilerServiceImpl implements WebFilterService {
 
     @Override
     public ApiResult<List<?>> getProductName(Long categoryId) {
-        List<Product> products = productRepository.findAllByCategoryId(categoryId);
+        List<Product> products = productRepository.findAllByCategoryIdAndSellerActiveIsTrue(categoryId);
         List<ProductWeb3DTO> productWeb3DTOS = new ArrayList<>();
         for (Product product : products) {
             productWeb3DTOS.add(new ProductWeb3DTO(product.getId(), product.getName()));
