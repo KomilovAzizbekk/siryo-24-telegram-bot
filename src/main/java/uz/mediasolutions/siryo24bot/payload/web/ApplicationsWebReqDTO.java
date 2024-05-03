@@ -15,7 +15,7 @@ public class ApplicationsWebReqDTO {
 
     private Long id;
 
-    private List<ProductWeb3DTO> products;
+    private List<Long> products;
 
     private String comment;
 

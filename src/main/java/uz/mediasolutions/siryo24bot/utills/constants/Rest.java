@@ -3,6 +3,7 @@ package uz.mediasolutions.siryo24bot.utills.constants;
 import uz.mediasolutions.siryo24bot.controller.abs.*;
 import uz.mediasolutions.siryo24bot.controller.web.abs.WebApplicationController;
 import uz.mediasolutions.siryo24bot.controller.web.abs.WebFilterController;
+import uz.mediasolutions.siryo24bot.controller.web.abs.WebPriceHistoryController;
 import uz.mediasolutions.siryo24bot.controller.web.abs.WebProductController;
 
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public interface Rest {
             WebFilterController.FILTER_WEB + "**",
             WebProductController.PRODUCT_WEB + "**",
             WebApplicationController.APPLICATION_WEB + "**",
+            WebPriceHistoryController.WEB_PRICE_HISTORY + "**",
             "/favicon.ico"
     };
 

@@ -15,6 +15,8 @@ public class UpdatesDTO {
 
     private Integer price;
 
+    private String status;
+
     private String updatedTime;
 
 }

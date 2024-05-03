@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import uz.mediasolutions.siryo24bot.entity.template.AbsLong;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,8 +24,11 @@ public class Updates extends AbsLong {
     @Column(name = "price")
     private Integer price;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PriceStatus status;
+
     @Column(name = "updated_time")
-    private String updatedTime;
+    private Timestamp updatedTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;

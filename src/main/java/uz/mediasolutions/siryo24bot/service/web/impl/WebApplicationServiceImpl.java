@@ -54,8 +54,8 @@ public class WebApplicationServiceImpl implements WebApplicationService {
     public ApiResult<?> add(ApplicationsWebReqDTO application, String userId) throws TelegramApiException {
 
         List<Product> products = new ArrayList<>();
-        for (ProductWeb3DTO product : application.getProducts()) {
-            Optional<Product> byId = productRepository.findById(product.getId());
+        for (Long product : application.getProducts()) {
+            Optional<Product> byId = productRepository.findById(product);
             byId.ifPresent(products::add);
         }
 

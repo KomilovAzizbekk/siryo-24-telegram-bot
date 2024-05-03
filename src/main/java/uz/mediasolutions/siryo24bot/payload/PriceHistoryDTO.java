@@ -19,8 +19,6 @@ public class PriceHistoryDTO {
 
     private String seller;
 
-    private String status;
-
     private List<UpdatesDTO> updates;
 
 }
