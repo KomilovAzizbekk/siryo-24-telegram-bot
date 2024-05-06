@@ -17,4 +17,6 @@ public class CategoryWebDTO {
 
     private String name;
 
+    private List<ProductWeb3DTO> products;
+
 }

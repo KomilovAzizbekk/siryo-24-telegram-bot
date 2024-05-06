@@ -12,6 +12,9 @@ import java.util.List;
 public class PageableConverter {
 
     public <T> Page<T> convert(List<T> list, Pageable pageable) {
+        if (list == null) {
+            return null;
+        }
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;

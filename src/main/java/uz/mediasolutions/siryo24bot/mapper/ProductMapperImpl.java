@@ -31,7 +31,6 @@ public class ProductMapperImpl implements ProductMapper {
     private final AlternativeRepository alternativeRepository;
     private final ProductRepository productRepository;
     private final TgUserRepository tgUserRepository;
-    private final PriceStatusRepository priceStatusRepository;
 
     @Override
     public ProductResDTO toDTO(Product product) {
@@ -40,15 +39,11 @@ public class ProductMapperImpl implements ProductMapper {
         }
         return ProductResDTO.builder()
                 .id(product.getId())
-                .seller(product.getSeller().getOrganization())
                 .name(product.getName())
                 .categoryId(product.getCategory().getId())
-                .sellerId(product.getSeller().getId())
                 .category(product.getCategory().getNameUz() + "/" + product.getCategory().getNameRu())
                 .country(product.getCountry())
                 .manufacturer(product.getManufacturer())
-                .price(product.getPrice())
-                .status(product.getStatus() != null ? product.getStatus().getName().name() : null)
                 .imageUrl(product.getImageUrl())
                 .priceUpdatedTime(product.getPriceUpdatedTime() != null ?
                         product.getPriceUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")) : "")
@@ -107,8 +102,6 @@ public class ProductMapperImpl implements ProductMapper {
         if (dto == null) {
             return null;
         }
-        Seller seller = sellerRepository.findById(dto.getSellerId()).orElseThrow(
-                () -> RestException.restThrow("Seller not found", HttpStatus.BAD_REQUEST));
 
         Category category = categoryRepository.findById(dto.getCategoryId()).orElseThrow(
                 () -> RestException.restThrow("Category not found", HttpStatus.BAD_REQUEST));
@@ -131,14 +124,11 @@ public class ProductMapperImpl implements ProductMapper {
         }
 
         return Product.builder()
-                .seller(seller)
                 .name(dto.getName())
                 .category(category)
                 .alternatives(alternatives)
                 .country(dto.getCountry())
                 .manufacturer(dto.getManufacturer())
-                .price(dto.getPrice())
-                .status(priceStatusRepository.findById(dto.getStatusId()).orElse(null))
                 .imageUrl(dto.getImageUrl())
                 .priceUpdatedTime(null)
                 .analogs(products)
@@ -162,7 +152,7 @@ public class ProductMapperImpl implements ProductMapper {
     }
 
     @Override
-    public ProductWebDTO toProductWebDTO(Product product, String userId) {
+    public ProductWebDTO toProductWebDTO(Product product, String userId, Seller seller) {
         if (product == null) {
             return null;
         }
@@ -180,15 +170,14 @@ public class ProductMapperImpl implements ProductMapper {
 
         return ProductWebDTO.builder()
                 .id(product.getId())
-                .seller(product.getSeller().getOrganization())
-                .acceptCash(product.getSeller().isAcceptCash())
-                .acceptTransfer(product.getSeller().isAcceptTransfer())
+                .seller(seller.getOrganization())
+                .sellerId(seller.getId())
+                .acceptCash(seller.isAcceptCash())
+                .acceptTransfer(seller.isAcceptTransfer())
                 .favourite(favourite)
                 .name(product.getName())
-                .status(product.getStatus() != null ? product.getStatus().getName().name() : null)
                 .country(product.getCountry())
                 .manufacturer(product.getManufacturer())
-                .price(product.getPrice())
                 .priceUpdatedTime(product.getPriceUpdatedTime() != null ?
                         product.getPriceUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")) :
                         product.getCreatedAt().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")))
@@ -227,17 +216,17 @@ public class ProductMapperImpl implements ProductMapper {
     }
 
     @Override
-    public Page<ProductWebDTO> toProductWebDTOPage(Page<Product> products, String userId) {
+    public List<ProductWebDTO> toProductWebDTOList(List<Product> products, String userId, Seller seller) {
         if (products == null) {
             return null;
         }
 
         List<ProductWebDTO> productWebDTOs = new ArrayList<>();
         for (Product product : products) {
-            productWebDTOs.add(toProductWebDTO(product, userId));
+            productWebDTOs.add(toProductWebDTO(product, userId, seller));
         }
 
-        return new PageImpl<>(productWebDTOs, products.getPageable(), products.getTotalElements());
+        return productWebDTOs;
     }
 
     @Override

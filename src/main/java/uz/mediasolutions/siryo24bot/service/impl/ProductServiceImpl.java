@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,10 +28,8 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapperImpl productMapper;
-    private final SellerRepository sellerRepository;
     private final CategoryRepository categoryRepository;
     private final AlternativeRepository alternativeRepository;
-    private final PriceStatusRepository priceStatusRepository;
 
     @Override
     public ApiResult<Page<ProductResDTO>> getAll(int page, int size, String search) {
@@ -68,10 +65,6 @@ public class ProductServiceImpl implements ProductService {
         //Getting product
         Product product = productRepository.findById(id).orElseThrow(
                 () -> RestException.restThrow("Product not found", HttpStatus.BAD_REQUEST));
-
-        //Getting new seller of product
-        Seller seller = sellerRepository.findById(dto.getSellerId()).orElseThrow(
-                () -> RestException.restThrow("Seller not found", HttpStatus.BAD_REQUEST));
 
         //Getting new category of product
         Category category = categoryRepository.findById(dto.getCategoryId()).orElseThrow(
@@ -116,17 +109,12 @@ public class ProductServiceImpl implements ProductService {
         }
 
         //Setting all fields
-        product.setSeller(seller);
         product.setCategory(category);
         product.setName(dto.getName());
         product.setAlternatives(alternatives);
         product.setCountry(dto.getCountry());
         product.setManufacturer(dto.getManufacturer());
-        product.setPrice(dto.getPrice());
-        product.setStatus(priceStatusRepository.findById(dto.getStatusId()).orElse(null));
         product.setImageUrl(dto.getImageUrl());
-        product.setPriceUpdatedTime(!Objects.equals(product.getPrice(), dto.getPrice()) ?
-                new Timestamp(System.currentTimeMillis()) : null);
         product.setAnalogs(analogs);
         productRepository.save(product);
         return ApiResult.success("Edited successfully");

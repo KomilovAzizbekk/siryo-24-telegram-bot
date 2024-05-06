@@ -8,6 +8,7 @@ import uz.mediasolutions.siryo24bot.entity.Seller;
 import uz.mediasolutions.siryo24bot.entity.TgUser;
 import uz.mediasolutions.siryo24bot.enums.LanguageName;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
+import uz.mediasolutions.siryo24bot.mapper.ProductMapper;
 import uz.mediasolutions.siryo24bot.payload.web.CategoryWebDTO;
 import uz.mediasolutions.siryo24bot.payload.web.ProductWeb3DTO;
 import uz.mediasolutions.siryo24bot.payload.web.SellerWebDTO;
@@ -27,6 +28,7 @@ public class WebFilerServiceImpl implements WebFilterService {
     private final TgUserRepository tgUserRepository;
     private final ProductRepository productRepository;
     private final SellerRepository sellerRepository;
+    private final ProductMapper productMapper;
 
     @Override
     public ApiResult<List<?>> getCategory(String userId) {
@@ -35,9 +37,9 @@ public class WebFilerServiceImpl implements WebFilterService {
         List<Category> categories = categoryRepository.findAll();
         for (Category category : categories) {
             if (user.getLanguage().getName().equals(LanguageName.UZ)) {
-                categoryWebDTOS.add(new CategoryWebDTO(category.getId(), category.getNameUz()));
+                categoryWebDTOS.add(new CategoryWebDTO(category.getId(), category.getNameUz(), productMapper.toProductWeb3DTOList(category.getProducts())));
             } else {
-                categoryWebDTOS.add(new CategoryWebDTO(category.getId(), category.getNameRu()));
+                categoryWebDTOS.add(new CategoryWebDTO(category.getId(), category.getNameRu(), productMapper.toProductWeb3DTOList(category.getProducts())));
             }
         }
         categoryWebDTOS.sort(Comparator.comparing(CategoryWebDTO::getName));

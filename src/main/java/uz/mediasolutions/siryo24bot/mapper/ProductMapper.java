@@ -3,6 +3,7 @@ package uz.mediasolutions.siryo24bot.mapper;
 import org.springframework.data.domain.Page;
 import uz.mediasolutions.siryo24bot.entity.Alternative;
 import uz.mediasolutions.siryo24bot.entity.Product;
+import uz.mediasolutions.siryo24bot.entity.Seller;
 import uz.mediasolutions.siryo24bot.payload.AlternativeDTO;
 import uz.mediasolutions.siryo24bot.payload.AnalogProductDTO;
 import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
@@ -30,13 +31,13 @@ public interface ProductMapper {
 
     ProductWeb2DTO toProductWeb2DTO(Product product);
 
-    ProductWebDTO toProductWebDTO(Product product, String userId);
+    ProductWebDTO toProductWebDTO(Product product, String userId, Seller seller);
 
     AnalogProductWebDTO toAnalogProductWebDTO(Product product, String userId);
 
     List<AnalogProductWebDTO> toAnalogProductWebDTOList(List<Product> products, String userId);
 
-    Page<ProductWebDTO> toProductWebDTOPage(Page<Product> products, String userId);
+    List<ProductWebDTO> toProductWebDTOList(List<Product> products, String userId, Seller seller);
 
     ProductWeb3DTO toProductWeb3DTO(Product product);
 

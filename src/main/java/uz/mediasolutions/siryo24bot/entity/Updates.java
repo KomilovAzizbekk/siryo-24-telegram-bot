@@ -22,10 +22,7 @@ import java.sql.Timestamp;
 public class Updates extends AbsLong {
 
     @Column(name = "price")
-    private Integer price;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PriceStatus status;
+    private String price;
 
     @Column(name = "updated_time")
     private Timestamp updatedTime;

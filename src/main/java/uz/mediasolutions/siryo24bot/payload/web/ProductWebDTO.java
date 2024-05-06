@@ -18,6 +18,8 @@ public class ProductWebDTO {
 
     private String seller;
 
+    private Long sellerId;
+
     private boolean acceptCash;
 
     private boolean acceptTransfer;

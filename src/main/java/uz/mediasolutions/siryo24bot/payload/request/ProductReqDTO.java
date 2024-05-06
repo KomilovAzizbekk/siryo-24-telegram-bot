@@ -15,8 +15,6 @@ public class ProductReqDTO {
 
     private Long id;
 
-    private Long sellerId;
-
     private String name;
 
     private Long categoryId;
@@ -26,10 +24,6 @@ public class ProductReqDTO {
     private String country;
 
     private String manufacturer;
-
-    private Integer price;
-
-    private Long statusId;
 
     private String imageUrl;
 

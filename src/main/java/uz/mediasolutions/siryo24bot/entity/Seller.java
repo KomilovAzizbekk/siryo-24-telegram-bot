@@ -45,6 +45,9 @@ public class Seller extends AbsLong {
     @Column(name = "accept_cash")
     private boolean acceptCash;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Product> products;
+
     @Column(name = "stock_market")
     private boolean stockMarket;
 

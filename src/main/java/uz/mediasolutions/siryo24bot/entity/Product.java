@@ -22,9 +22,6 @@ import java.util.List;
 @Table(name = "products")
 public class Product extends AbsLong {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Seller seller;
-
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -40,9 +37,6 @@ public class Product extends AbsLong {
     @Column(name = "manufacturer", nullable = false)
     private String manufacturer;
 
-    @Column(name = "price", nullable = false)
-    private Integer price;
-
     @Column(name = "image_url")
     private String imageUrl;
 
@@ -51,9 +45,6 @@ public class Product extends AbsLong {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Product> analogs;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PriceStatus status;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Updates> updates;
