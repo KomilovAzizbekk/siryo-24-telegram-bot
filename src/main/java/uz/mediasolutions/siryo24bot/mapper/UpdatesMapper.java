@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface UpdatesMapper {
 
-    PriceHistoryDTO toDTO(Product product);
+    PriceHistoryDTO toDTO(Updates updates);
 
     UpdatesDTO toUpdatesDTO(Updates updates);
 

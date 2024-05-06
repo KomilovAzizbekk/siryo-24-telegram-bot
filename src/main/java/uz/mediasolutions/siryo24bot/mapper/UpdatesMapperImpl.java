@@ -20,16 +20,16 @@ import java.util.List;
 public class UpdatesMapperImpl implements UpdatesMapper {
 
     @Override
-    public PriceHistoryDTO toDTO(Product product) {
-        if (product == null) {
+    public PriceHistoryDTO toDTO(Updates updates) {
+        if (updates == null) {
             return null;
         }
 
         return PriceHistoryDTO.builder()
-                .id(product.getId())
-                .seller(product.getSeller().getOrganization())
-                .product(product.getName())
-                .updates(toUpdatesDTOList(product.getUpdates()))
+                .id(updates.getId())
+                .seller(updates.getSeller().getOrganization())
+                .product(updates.getProduct().getName())
+                .updates(toUpdatesDTO(updates))
                 .build();
     }
 
@@ -40,7 +40,6 @@ public class UpdatesMapperImpl implements UpdatesMapper {
         }
         return UpdatesDTO.builder()
                 .id(updates.getId())
-                .status(updates.getStatus().getName().name())
                 .updatedTime(updates.getUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")))
                 .price(updates.getPrice())
                 .build();
@@ -72,7 +71,6 @@ public class UpdatesMapperImpl implements UpdatesMapper {
                 .manufacturer(updates.getProduct().getManufacturer())
                 .seller(updates.getSeller().getOrganization())
                 .updatedTime(updates.getUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")))
-                .status(updates.getStatus().getName().name())
                 .product(updates.getProduct().getName())
                 .build();
         priceHistoryWebDTOList.add(priceHistoryWebDTO);

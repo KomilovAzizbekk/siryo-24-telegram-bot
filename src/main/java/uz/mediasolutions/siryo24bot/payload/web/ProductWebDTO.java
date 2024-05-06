@@ -32,9 +32,7 @@ public class ProductWebDTO {
 
     private String manufacturer;
 
-    private Integer price;
-
-    private String status;
+    private String price;
 
     private String priceUpdatedTime;
 

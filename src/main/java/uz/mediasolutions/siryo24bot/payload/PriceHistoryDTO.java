@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +17,6 @@ public class PriceHistoryDTO {
 
     private String seller;
 
-    private List<UpdatesDTO> updates;
+    private UpdatesDTO updates;
 
 }

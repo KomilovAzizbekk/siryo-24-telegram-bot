@@ -13,8 +13,8 @@ public interface WebProductController {
     String PRODUCT_WEB = Rest.BASE_PATH + "product-web/";
     String GET_ALL = "get-all/{userId}";
     String GET_FAVOURITES = "get-fav/{userId}";
-    String GET_BY_ID = "get-by-id/{id}";
-    String ADD_REMOVE_FAVORITES = "add-remove-favorites/{id}/{userId}";
+    String GET_BY_ID = "get-by-id/{id}/{sellerId}";
+    String ADD_REMOVE_FAVORITES = "add-remove-favorites/{id}/{sellerId}/{userId}";
 
     @GetMapping(GET_ALL)
     ApiResult<Page<ProductWebDTO>> getAll(@PathVariable String userId,
@@ -34,10 +34,12 @@ public interface WebProductController {
                                                  @RequestParam(defaultValue = Rest.DEFAULT_PAGE_SIZE) int size);
 
     @GetMapping(GET_BY_ID)
-    ApiResult<ProductWeb2DTO> getById(@PathVariable Long id);
+    ApiResult<ProductWeb2DTO> getById(@PathVariable Long id,
+                                      @PathVariable Long sellerId);
 
     @PostMapping(ADD_REMOVE_FAVORITES)
     ApiResult<?> addOrRemoveFavorites(@PathVariable Long id,
+                                      @PathVariable Long sellerId,
                                       @PathVariable String userId,
                                       @RequestParam("add") boolean add);
 

@@ -20,13 +20,11 @@ public class PriceHistoryWebDTO {
 
     private String seller;
 
-    private String status;
-
     private String country;
 
     private String manufacturer;
 
-    private Integer price;
+    private String price;
 
     private String updatedTime;
 

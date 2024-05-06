@@ -17,7 +17,7 @@ public interface UpdatesRepository extends JpaRepository<Updates, Long> {
             "              AND (:name IS NULL OR p.name = :name)\n" +
             "              AND (:country IS NULL OR p.country = :country)\n" +
             "              AND (:manufacturer IS NULL OR p.manufacturer = :manufacturer)\n" +
-            "              AND (:seller IS NULL OR p.seller_id = :seller)\n" +
+            "              AND (:seller IS NULL OR u.seller_id = :seller)\n" +
             "              AND u.updated_time > TO_TIMESTAMP(:from)\n" +
             "              AND u.updated_time < TO_TIMESTAMP(:to)\n" +
             "              AND s.active = true\n" +
@@ -38,6 +38,16 @@ public interface UpdatesRepository extends JpaRepository<Updates, Long> {
             "         join public.products p on p.id = u.product_id\n" +
             "         join public.sellers s on s.id = u.seller_id\n" +
             "WHERE p.name ILIKE '%' || :search || '%'\n" +
+            "  AND s.organization ILIKE '%' || :search || '%'\n" +
+            "  AND s.active = true\n" +
+            "ORDER BY u.updated_time DESC", nativeQuery = true)
+    Page<Updates> findAllForHistory(@Param("search") String search, Pageable pageable);
+
+    @Query(value = "SELECT u.*\n" +
+            "FROM updates u\n" +
+            "         join public.products p on p.id = u.product_id\n" +
+            "         join public.sellers s on s.id = u.seller_id\n" +
+            "WHERE p.name ILIKE '%' || :search || '%'\n" +
             "  AND u.updated_time > TO_TIMESTAMP(:from)\n" +
             "  AND u.updated_time < TO_TIMESTAMP(:to)\n" +
             "  AND s.active = true\n" +
@@ -47,5 +57,7 @@ public interface UpdatesRepository extends JpaRepository<Updates, Long> {
             @Param("from") Long from,
             @Param("to") Long to,
             Pageable pageable);
+
+    Updates findTopBySellerIdAndProductIdOrderByUpdatedTimeDesc(Long sellerId, Long productId);
 
 }

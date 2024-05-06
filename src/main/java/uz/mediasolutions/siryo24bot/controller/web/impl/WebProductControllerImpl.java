@@ -26,13 +26,13 @@ public class WebProductControllerImpl implements WebProductController {
     }
 
     @Override
-    public ApiResult<ProductWeb2DTO> getById(Long id) {
-        return webProductService.getById(id);
+    public ApiResult<ProductWeb2DTO> getById(Long id, Long sellerId) {
+        return webProductService.getById(id, sellerId);
     }
 
     @Override
-    public ApiResult<?> addOrRemoveFavorites(Long id, String userId, boolean add) {
-        return webProductService.addOrRemoveFavorites(id, userId, add);
+    public ApiResult<?> addOrRemoveFavorites(Long id, Long sellerId, String userId, boolean add) {
+        return webProductService.addOrRemoveFavorites(id, sellerId, userId, add);
     }
 
 

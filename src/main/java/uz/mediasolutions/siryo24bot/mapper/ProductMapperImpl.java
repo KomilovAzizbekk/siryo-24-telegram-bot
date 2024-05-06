@@ -1,8 +1,6 @@
 package uz.mediasolutions.siryo24bot.mapper;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import uz.mediasolutions.siryo24bot.entity.*;
@@ -26,7 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductMapperImpl implements ProductMapper {
 
-    private final SellerRepository sellerRepository;
+    private final UpdatesRepository updatesRepository;
     private final CategoryRepository categoryRepository;
     private final AlternativeRepository alternativeRepository;
     private final ProductRepository productRepository;
@@ -45,8 +43,6 @@ public class ProductMapperImpl implements ProductMapper {
                 .country(product.getCountry())
                 .manufacturer(product.getManufacturer())
                 .imageUrl(product.getImageUrl())
-                .priceUpdatedTime(product.getPriceUpdatedTime() != null ?
-                        product.getPriceUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")) : "")
                 .analogs(toAnalogProductDTOList(product.getAnalogs()))
                 .alternativeNames(toAlternativeDTOList(product.getAlternatives()))
                 .build();
@@ -130,23 +126,22 @@ public class ProductMapperImpl implements ProductMapper {
                 .country(dto.getCountry())
                 .manufacturer(dto.getManufacturer())
                 .imageUrl(dto.getImageUrl())
-                .priceUpdatedTime(null)
                 .analogs(products)
                 .build();
 
     }
 
     @Override
-    public ProductWeb2DTO toProductWeb2DTO(Product product) {
+    public ProductWeb2DTO toProductWeb2DTO(Product product, Seller seller) {
         if (product == null) {
             return null;
         }
         return ProductWeb2DTO.builder()
                 .id(product.getId())
-                .sellerInfo(product.getSeller().getInfo())
+                .sellerInfo(seller.getInfo())
                 .name(product.getName())
-                .sellerPhone1(product.getSeller().getPhoneNumber1())
-                .sellerPhone2(product.getSeller().getPhoneNumber2())
+                .sellerPhone1(seller.getPhoneNumber1())
+                .sellerPhone2(seller.getPhoneNumber2())
                 .imageUrl(product.getImageUrl())
                 .build();
     }
@@ -159,14 +154,17 @@ public class ProductMapperImpl implements ProductMapper {
 
         boolean favourite = false;
         TgUser user = tgUserRepository.findByChatId(userId);
-        if (user.getProducts() != null) {
-            for (Product userProduct : user.getProducts()) {
-                if (userProduct.getId().equals(product.getId())) {
+        if (user.getFavouriteProducts() != null) {
+            for (FavouriteProducts favouriteProducts : user.getFavouriteProducts()) {
+                if (favouriteProducts.getProduct().getId().equals(product.getId()) &&
+                        favouriteProducts.getSeller().getId().equals(seller.getId())) {
                     favourite = true;
                     break;
                 }
             }
         }
+
+        Updates updates = updatesRepository.findTopBySellerIdAndProductIdOrderByUpdatedTimeDesc(seller.getId(), product.getId());
 
         return ProductWebDTO.builder()
                 .id(product.getId())
@@ -178,9 +176,8 @@ public class ProductMapperImpl implements ProductMapper {
                 .name(product.getName())
                 .country(product.getCountry())
                 .manufacturer(product.getManufacturer())
-                .priceUpdatedTime(product.getPriceUpdatedTime() != null ?
-                        product.getPriceUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")) :
-                        product.getCreatedAt().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")))
+                .priceUpdatedTime(updates != null ? updates.getUpdatedTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")) :
+                        seller.getCreatedAt().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")))
                 .analogs(toAnalogProductWebDTOList(product.getAnalogs(), userId))
                 .analogsCount(toAnalogProductWebDTOList(product.getAnalogs(), userId).size())
                 .build();

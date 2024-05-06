@@ -10,7 +10,8 @@ import uz.mediasolutions.siryo24bot.entity.Seller;
 import uz.mediasolutions.siryo24bot.exceptions.RestException;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.mapper.SellerMapper;
-import uz.mediasolutions.siryo24bot.payload.SellerDTO;
+import uz.mediasolutions.siryo24bot.payload.request.SellerReqDTO;
+import uz.mediasolutions.siryo24bot.payload.response.SellerResDTO;
 import uz.mediasolutions.siryo24bot.repository.SellerRepository;
 import uz.mediasolutions.siryo24bot.service.abs.SellerService;
 
@@ -22,50 +23,50 @@ public class SellerServiceImpl implements SellerService {
     private final SellerMapper sellerMapper;
 
     @Override
-    public ApiResult<Page<SellerDTO>> getAll(int page, int size, String search) {
+    public ApiResult<Page<SellerResDTO>> getAll(int page, int size, String search) {
         Pageable pageable = PageRequest.of(page, size);
         if (search == null || search.isEmpty()) {
             Page<Seller> sellers = sellerRepository.findAllByOrderByCreatedAtDesc(pageable);
-            Page<SellerDTO> map = sellers.map(sellerMapper::toDTO);
+            Page<SellerResDTO> map = sellers.map(sellerMapper::toDTO);
             return ApiResult.success(map);
         } else {
             Page<Seller> sellers = sellerRepository.findAllByOrganizationContainingIgnoreCaseOrderByCreatedAtDesc(search, pageable);
-            Page<SellerDTO> map = sellers.map(sellerMapper::toDTO);
+            Page<SellerResDTO> map = sellers.map(sellerMapper::toDTO);
             return ApiResult.success(map);
         }
     }
 
     @Override
-    public ApiResult<Page<SellerDTO>> getAllActive(int page, int size, String search) {
+    public ApiResult<Page<SellerResDTO>> getAllActive(int page, int size, String search) {
         Pageable pageable = PageRequest.of(page, size);
         if (search == null || search.isEmpty()) {
             Page<Seller> sellers = sellerRepository.findAllByActiveIsTrueOrderByCreatedAtDesc(pageable);
-            Page<SellerDTO> map = sellers.map(sellerMapper::toDTO);
+            Page<SellerResDTO> map = sellers.map(sellerMapper::toDTO);
             return ApiResult.success(map);
         } else {
             Page<Seller> sellers = sellerRepository.findAllByOrganizationContainingIgnoreCaseAndActiveIsTrueOrderByCreatedAtDesc(search, pageable);
-            Page<SellerDTO> map = sellers.map(sellerMapper::toDTO);
+            Page<SellerResDTO> map = sellers.map(sellerMapper::toDTO);
             return ApiResult.success(map);
         }
     }
 
     @Override
-    public ApiResult<SellerDTO> getById(Long id) {
+    public ApiResult<SellerResDTO> getById(Long id) {
         Seller seller = sellerRepository.findById(id).orElseThrow(
                 () -> RestException.restThrow("Seller not found", HttpStatus.BAD_REQUEST));
-        SellerDTO dto = sellerMapper.toDTO(seller);
+        SellerResDTO dto = sellerMapper.toDTO(seller);
         return ApiResult.success(dto);
     }
 
     @Override
-    public ApiResult<?> add(SellerDTO dto) {
+    public ApiResult<?> add(SellerReqDTO dto) {
         Seller seller = sellerMapper.toEntity(dto);
         sellerRepository.save(seller);
         return ApiResult.success("Saved successfully");
     }
 
     @Override
-    public ApiResult<?> edit(SellerDTO dto, Long id) {
+    public ApiResult<?> edit(SellerReqDTO dto, Long id) {
         Seller seller = sellerRepository.findById(id).orElseThrow(
                 () -> RestException.restThrow("Seller not found", HttpStatus.BAD_REQUEST));
 
@@ -81,5 +82,16 @@ public class SellerServiceImpl implements SellerService {
         seller.setAcceptTransfer(dto.isAcceptTransfer());
         sellerRepository.save(seller);
         return ApiResult.success("Edited successfully");
+    }
+
+    @Override
+    public ApiResult<?> delete(Long id) {
+        try {
+            sellerRepository.deleteById(id);
+            return ApiResult.success("Deleted successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw RestException.restThrow("Delete failed", HttpStatus.BAD_REQUEST);
+        }
     }
 }

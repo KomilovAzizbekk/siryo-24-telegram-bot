@@ -30,16 +30,17 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapperImpl productMapper;
     private final CategoryRepository categoryRepository;
     private final AlternativeRepository alternativeRepository;
+    private final SellerRepository sellerRepository;
 
     @Override
     public ApiResult<Page<ProductResDTO>> getAll(int page, int size, String search) {
         Pageable pageable = PageRequest.of(page, size);
         if (search == null || search.isEmpty()) {
-            Page<Product> products = productRepository.findAllBySellerActiveIsTrueOrderByCreatedAtDesc(pageable);
+            Page<Product> products = productRepository.findAllByOrderByCreatedAtDesc(pageable);
             Page<ProductResDTO> map = products.map(productMapper::toDTO);
             return ApiResult.success(map);
         } else {
-            Page<Product> products = productRepository.findAllByNameContainingIgnoreCaseAndSellerActiveIsTrueOrderByNameAsc(search, pageable);
+            Page<Product> products = productRepository.findAllByNameContainingIgnoreCaseAndSellerActiveIsTrueOrderByNameAscPageable(search, pageable);
             Page<ProductResDTO> map = products.map(productMapper::toDTO);
             return ApiResult.success(map);
         }
@@ -130,6 +131,10 @@ public class ProductServiceImpl implements ProductService {
             Path path = Paths.get(imagePath);
             Files.deleteIfExists(path);
         }
+
+        Seller all = sellerRepository.findAllByProductId(id);
+        List<Product> products = all.getProducts();
+        products.remove(product);
         try {
             productRepository.deleteById(id);
             return ApiResult.success("Deleted successfully");

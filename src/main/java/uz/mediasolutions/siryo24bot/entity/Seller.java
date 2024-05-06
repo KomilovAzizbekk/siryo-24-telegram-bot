@@ -3,6 +3,7 @@ package uz.mediasolutions.siryo24bot.entity;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import uz.mediasolutions.siryo24bot.entity.template.AbsDate;
 import uz.mediasolutions.siryo24bot.entity.template.AbsLong;
 
 import javax.persistence.*;
@@ -19,7 +20,11 @@ import java.util.List;
 @DynamicUpdate
 @Entity
 @Table(name = "sellers")
-public class Seller extends AbsLong {
+public class Seller extends AbsDate {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "organization", nullable = false)
     private String organization;
@@ -53,5 +58,8 @@ public class Seller extends AbsLong {
 
     @Column(name = "accept_transfer")
     private boolean acceptTransfer;
+
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<FavouriteProducts> favouriteProducts;
 
 }

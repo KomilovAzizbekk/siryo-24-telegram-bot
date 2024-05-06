@@ -46,6 +46,6 @@ public class TgUser extends AbsLong {
     private Role role;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Product> products;
+    private List<FavouriteProducts> favouriteProducts;
 
 }

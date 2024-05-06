@@ -1,14 +1,13 @@
 package uz.mediasolutions.siryo24bot.mapper;
 
-import org.mapstruct.Mapper;
 import uz.mediasolutions.siryo24bot.entity.Seller;
-import uz.mediasolutions.siryo24bot.payload.SellerDTO;
+import uz.mediasolutions.siryo24bot.payload.request.SellerReqDTO;
+import uz.mediasolutions.siryo24bot.payload.response.SellerResDTO;
 
-@Mapper(componentModel = "spring")
 public interface SellerMapper {
 
-    SellerDTO toDTO(Seller seller);
+    SellerResDTO toDTO(Seller seller);
 
-    Seller toEntity(SellerDTO sellerDTO);
+    Seller toEntity(SellerReqDTO sellerReqDTO);
 
 }

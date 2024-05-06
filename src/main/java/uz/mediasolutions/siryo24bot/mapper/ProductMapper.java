@@ -29,7 +29,7 @@ public interface ProductMapper {
 
     Product toEntity(ProductReqDTO dto);
 
-    ProductWeb2DTO toProductWeb2DTO(Product product);
+    ProductWeb2DTO toProductWeb2DTO(Product product, Seller seller);
 
     ProductWebDTO toProductWebDTO(Product product, String userId, Seller seller);
 

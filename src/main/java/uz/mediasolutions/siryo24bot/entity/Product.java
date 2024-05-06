@@ -40,13 +40,13 @@ public class Product extends AbsLong {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "price_updated_time")
-    private Timestamp priceUpdatedTime;
-
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Product> analogs;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Updates> updates;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<FavouriteProducts> favouriteProducts;
 
 }
