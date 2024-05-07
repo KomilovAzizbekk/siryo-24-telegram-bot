@@ -4,8 +4,10 @@ import org.springframework.data.domain.Page;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
+import uz.mediasolutions.siryo24bot.payload.web.ProductWeb3DTO;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface ProductService {
 
@@ -19,4 +21,5 @@ public interface ProductService {
 
     ApiResult<?> delete(Long id) throws IOException;
 
+    ApiResult<List<ProductWeb3DTO>> getBySeller(Long sellerId);
 }

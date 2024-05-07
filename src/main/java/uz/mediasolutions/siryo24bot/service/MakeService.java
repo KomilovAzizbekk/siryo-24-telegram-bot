@@ -23,7 +23,6 @@ import uz.mediasolutions.siryo24bot.enums.StepName;
 import uz.mediasolutions.siryo24bot.repository.*;
 import uz.mediasolutions.siryo24bot.utills.constants.Message;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;

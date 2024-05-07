@@ -23,7 +23,7 @@ public interface WebPriceHistoryController {
                                                @RequestParam(required = false) String country,
                                                @RequestParam(required = false) String manufacturer,
                                                @RequestParam(required = false) Long seller,
-                                               @RequestParam Long from,
-                                               @RequestParam Long to);
+                                               @RequestParam(required = false) Long from,
+                                               @RequestParam(required = false) Long to);
 
 }

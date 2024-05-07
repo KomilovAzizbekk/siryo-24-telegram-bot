@@ -25,7 +25,9 @@ public class SellerMapperImpl implements SellerMapper {
         }
 
         List<ProductWeb3DTO> products = new ArrayList<>();
-        seller.getProducts().forEach(product -> products.add(new ProductWeb3DTO(product.getId(), product.getName())));
+        for (Product product : seller.getProducts()) {
+            products.add(new ProductWeb3DTO(product.getId(), product.getName()));
+        }
 
         return SellerResDTO.builder()
                 .id(seller.getId())
@@ -63,7 +65,7 @@ public class SellerMapperImpl implements SellerMapper {
                 .phoneNumber2(seller.getPhoneNumber2())
                 .organization(seller.getOrganization())
                 .stockMarket(seller.isStockMarket())
-                .products(products)
+                .products(seller.getProducts() != null ? products : null)
                 .build();
     }
 }

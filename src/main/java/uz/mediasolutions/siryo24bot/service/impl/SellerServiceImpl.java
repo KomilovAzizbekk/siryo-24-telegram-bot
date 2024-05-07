@@ -6,19 +6,24 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import uz.mediasolutions.siryo24bot.entity.Product;
 import uz.mediasolutions.siryo24bot.entity.Seller;
 import uz.mediasolutions.siryo24bot.exceptions.RestException;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.mapper.SellerMapper;
 import uz.mediasolutions.siryo24bot.payload.request.SellerReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.SellerResDTO;
+import uz.mediasolutions.siryo24bot.repository.ProductRepository;
 import uz.mediasolutions.siryo24bot.repository.SellerRepository;
 import uz.mediasolutions.siryo24bot.service.abs.SellerService;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class SellerServiceImpl implements SellerService {
 
+    private final ProductRepository productRepository;
     private final SellerRepository sellerRepository;
     private final SellerMapper sellerMapper;
 
@@ -70,6 +75,9 @@ public class SellerServiceImpl implements SellerService {
         Seller seller = sellerRepository.findById(id).orElseThrow(
                 () -> RestException.restThrow("Seller not found", HttpStatus.BAD_REQUEST));
 
+        List<Product> products = productRepository.findAllById(dto.getProducts());
+
+        seller.setProducts(dto.getProducts() != null ? products : null);
         seller.setOrganization(dto.getOrganization());
         seller.setPhoneNumber1(dto.getPhoneNumber1());
         seller.setPhoneNumber2(dto.getPhoneNumber2());
@@ -86,6 +94,10 @@ public class SellerServiceImpl implements SellerService {
 
     @Override
     public ApiResult<?> delete(Long id) {
+        Seller seller = sellerRepository.findById(id).orElseThrow(
+                () -> RestException.restThrow("Seller not found", HttpStatus.BAD_REQUEST));
+        List<Product> products = seller.getProducts();
+        products.clear();
         try {
             sellerRepository.deleteById(id);
             return ApiResult.success("Deleted successfully");

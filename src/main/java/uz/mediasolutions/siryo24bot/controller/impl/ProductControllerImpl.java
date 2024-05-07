@@ -7,9 +7,11 @@ import uz.mediasolutions.siryo24bot.controller.abs.ProductController;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
+import uz.mediasolutions.siryo24bot.payload.web.ProductWeb3DTO;
 import uz.mediasolutions.siryo24bot.service.abs.ProductService;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +22,11 @@ public class ProductControllerImpl implements ProductController {
     @Override
     public ApiResult<Page<ProductResDTO>> getAll(int page, int size, String search) {
         return productService.getAll(page, size, search);
+    }
+
+    @Override
+    public ApiResult<List<ProductWeb3DTO>> gwtBySeller(Long sellerId) {
+        return productService.getBySeller(sellerId);
     }
 
     @Override

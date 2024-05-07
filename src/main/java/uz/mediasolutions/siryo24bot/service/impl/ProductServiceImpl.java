@@ -12,6 +12,7 @@ import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.mapper.ProductMapperImpl;
 import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
+import uz.mediasolutions.siryo24bot.payload.web.ProductWeb3DTO;
 import uz.mediasolutions.siryo24bot.repository.*;
 import uz.mediasolutions.siryo24bot.service.abs.ProductService;
 
@@ -133,8 +134,10 @@ public class ProductServiceImpl implements ProductService {
         }
 
         Seller all = sellerRepository.findAllByProductId(id);
-        List<Product> products = all.getProducts();
-        products.remove(product);
+        if (all != null) {
+            List<Product> products = all.getProducts();
+            products.clear();
+        }
         try {
             productRepository.deleteById(id);
             return ApiResult.success("Deleted successfully");
@@ -142,5 +145,14 @@ public class ProductServiceImpl implements ProductService {
             e.printStackTrace();
             throw RestException.restThrow("Delete failed", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Override
+    public ApiResult<List<ProductWeb3DTO>> getBySeller(Long sellerId) {
+        Seller seller = sellerRepository.findById(sellerId).orElseThrow(
+                () -> RestException.restThrow("Seller not found", HttpStatus.BAD_REQUEST));
+        List<Product> products = seller.getProducts();
+        List<ProductWeb3DTO> productWeb3DTOList = productMapper.toProductWeb3DTOList(products);
+        return ApiResult.success(productWeb3DTOList);
     }
 }

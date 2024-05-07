@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import uz.mediasolutions.siryo24bot.controller.web.abs.WebPriceHistoryController;
 import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.payload.web.PriceHistoryWebDTO;
-import uz.mediasolutions.siryo24bot.service.abs.PriceHistoryService;
 import uz.mediasolutions.siryo24bot.service.web.abs.WebPriceHistoryService;
 
 @RestController

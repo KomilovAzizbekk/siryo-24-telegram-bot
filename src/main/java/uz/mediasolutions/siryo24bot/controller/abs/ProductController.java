@@ -6,9 +6,11 @@ import uz.mediasolutions.siryo24bot.manual.ApiResult;
 import uz.mediasolutions.siryo24bot.payload.CategoryDTO;
 import uz.mediasolutions.siryo24bot.payload.request.ProductReqDTO;
 import uz.mediasolutions.siryo24bot.payload.response.ProductResDTO;
+import uz.mediasolutions.siryo24bot.payload.web.ProductWeb3DTO;
 import uz.mediasolutions.siryo24bot.utills.constants.Rest;
 
 import java.io.IOException;
+import java.util.List;
 
 @RequestMapping(ProductController.PRODUCT)
 public interface ProductController {
@@ -16,6 +18,7 @@ public interface ProductController {
     String PRODUCT = Rest.BASE_PATH + "product/";
     String GET_ALL = "get-all";
     String GET_BY_ID = "get/{id}";
+    String GET_BY_SELLER = "get/{sellerId}";
     String ADD = "add";
     String EDIT = "edit/{id}";
     String DELETE = "delete/{id}";
@@ -24,6 +27,9 @@ public interface ProductController {
     ApiResult<Page<ProductResDTO>> getAll(@RequestParam(defaultValue = Rest.DEFAULT_PAGE_NUMBER) int page,
                                           @RequestParam(defaultValue = Rest.DEFAULT_PAGE_SIZE) int size,
                                           @RequestParam(required = false) String search);
+
+    @GetMapping(GET_BY_SELLER)
+    ApiResult<List<ProductWeb3DTO>> gwtBySeller(@PathVariable Long sellerId);
 
     @GetMapping(GET_BY_ID)
     ApiResult<ProductResDTO> getById(@PathVariable Long id);
